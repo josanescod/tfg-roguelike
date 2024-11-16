@@ -51,6 +51,8 @@ func generate(algorithm: int) -> void:
 func generate_random_walk() -> void:
 	var current_x = int(ship_width / 2.0)
 	var current_y = int(ship_heigth / 2.0)
+	current_x = init_x
+	current_y = init_y
 	var rooms_created = 0
 	var first_room_created = false
 	
