@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 # Main function to be executed in each physics frame
-func _physics_process(delta):
+func _physics_process(_delta):
 	player_input()
 
 # Function to manage player input and determine the direction of motion
