@@ -9,7 +9,7 @@ size = Vector2(25, 46)
 
 [node name="World" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
+[node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
 position = Vector2(72, 72)
 script = ExtResource("2_c420u")
 
@@ -25,7 +25,7 @@ position = Vector2(0.5, -0.387505)
 shape = SubResource("RectangleShape2D_b0ylf")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.2, 0.2)
+zoom = Vector2(0.5, 0.5)
 
 [node name="RoomBuilder" type="Node" parent="."]
 script = ExtResource("4_sw0u1")

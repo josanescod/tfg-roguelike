@@ -1,5 +1,8 @@
 extends CharacterBody2D
 
+# initial condition Player has not the key
+var has_key : bool = false
+
 # Main function to be executed in each physics frame
 func _physics_process(_delta):
 	player_input()
@@ -31,5 +34,3 @@ func move(direction : Vector2) -> void:
 		return			
 	else:
 		position += 48 * direction
-
-	

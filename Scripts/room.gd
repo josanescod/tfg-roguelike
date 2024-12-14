@@ -21,4 +21,3 @@ func east():
 func west():
 	$WestDoor.visible = true
 	$WestWall.queue_free()
-	

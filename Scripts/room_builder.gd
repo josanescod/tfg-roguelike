@@ -1,6 +1,8 @@
 extends Node
 
 @onready var room_scene : PackedScene = load("res://Nodes/room.tscn")
+@onready var door_scene : PackedScene = load("res://Nodes/door.tscn")
+@onready var key_scene : PackedScene = load("res://Nodes/key.tscn")
 
 var ship_width : int = 7
 var ship_heigth : int = 7
@@ -46,7 +48,10 @@ func generate(algorithm: int) -> void:
 				
 	instantiate_rooms()
 	$"../Player".global_position = (initial_room_position * 816) + Vector2(262, 262)
-	
+	# test key and door
+	instantiate_end_door()
+	instantiate_key()
+
 # Ramdom Walk 
 func generate_random_walk() -> void:
 	var current_x = int(ship_width / 2.0)
@@ -115,7 +120,6 @@ func test_generate_rooms() -> void:
 	
 	print(preview)
 
-
 func instantiate_rooms() -> void:
 	if rooms_instantiated:
 		return
@@ -141,3 +145,22 @@ func instantiate_rooms() -> void:
 	
 			$"..".call_deferred("add_child", room)
 			room_nodes.append(room)
+
+func instantiate_end_door() -> void:
+		# end_door in the room
+	var door = door_scene.instantiate()
+	var player_position = $"../Player".global_position
+	door.global_position = player_position + Vector2(50, 50)
+	$"..".call_deferred("add_child", door)
+
+func instantiate_key() -> void:
+	var available_rooms = []
+	for x in range(ship_heigth):
+		for y in range(ship_heigth):
+			if ship_map[x][y]:
+				available_rooms.append(Vector2(x,y))
+	if available_rooms.size() > 0:
+		var random_room_position = available_rooms[randi() % available_rooms.size()]
+		var key = key_scene.instantiate()
+		key.global_position = random_room_position * 816 + Vector2(408, 408)
+		$"..".call_deferred("add_child", key)
