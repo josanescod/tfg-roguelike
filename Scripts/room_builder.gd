@@ -6,7 +6,7 @@ extends Node
 
 var ship_width : int = 7
 var ship_heigth : int = 7
-var rooms_to_build : int = randi_range(6,12) # 6,12
+var rooms_to_build : int = randi_range(3,5) # 6,12
 var room_counter: int = 0
 var initial_room_position : Vector2
 var rooms_instantiated : bool = false
@@ -17,6 +17,10 @@ var init_y : int = randi_range(0,6)
 var algorithm_execution_time : float = 0
 var ship_map : Array
 var room_nodes: Array
+
+var player_position: Vector2
+var key_position: Vector2
+var door_position: Vector2
 
 # Procedural generation algorithms
 enum GenerationAlgorithm {
@@ -49,8 +53,9 @@ func generate(algorithm: int) -> void:
 	instantiate_rooms()
 	$"../Player".global_position = (initial_room_position * 816) + Vector2(262, 262)
 	# test key and door
-	instantiate_end_door()
 	instantiate_key()
+	instantiate_exit_door()
+
 
 # Ramdom Walk 
 func generate_random_walk() -> void:
@@ -142,25 +147,40 @@ func instantiate_rooms() -> void:
 				
 			if initial_room_position != Vector2(x, y): # initial_room_position to put tutorial?
 				room.RoomBuilder = self
-	
 			$"..".call_deferred("add_child", room)
 			room_nodes.append(room)
 
-func instantiate_end_door() -> void:
-		# end_door in the room
-	var door = door_scene.instantiate()
-	var player_position = $"../Player".global_position
-	door.global_position = player_position + Vector2(50, 50)
-	$"..".call_deferred("add_child", door)
 
 func instantiate_key() -> void:
 	var available_rooms = []
-	for x in range(ship_heigth):
+	for x in range(ship_width):
 		for y in range(ship_heigth):
 			if ship_map[x][y]:
-				available_rooms.append(Vector2(x,y))
+				var room_position = Vector2(x, y)
+				# Exclude Player's room and exit_door's room
+				if room_position != player_position and room_position != key_position:
+					available_rooms.append(room_position)
 	if available_rooms.size() > 0:
 		var random_room_position = available_rooms[randi() % available_rooms.size()]
 		var key = key_scene.instantiate()
 		key.global_position = random_room_position * 816 + Vector2(408, 408)
 		$"..".call_deferred("add_child", key)
+		key_position = random_room_position
+
+
+func instantiate_exit_door() -> void:
+	# list available rooms
+	var available_rooms = []
+	for x in range (ship_width):
+		for y in range (ship_heigth):
+			if ship_map[x][y]:
+				var room_position = Vector2(x,y)
+				# Exclude Player's room and key's room
+				if room_position != player_position and room_position != key_position:
+					available_rooms.append(room_position)
+	if available_rooms.size() > 0:
+		var random_room_position = available_rooms[randi() % available_rooms.size()]
+		var door = door_scene.instantiate()
+		door.global_position = random_room_position * 816 + Vector2(408, 408)
+		$"..".call_deferred("add_child", door)
+		door_position = random_room_position
