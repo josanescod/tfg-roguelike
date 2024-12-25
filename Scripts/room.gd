@@ -21,3 +21,6 @@ func east():
 func west():
 	$WestDoor.visible = true
 	$WestWall.queue_free()
+	
+func show_instructions():
+	$Instructions_Floor.visible = true

@@ -134,8 +134,7 @@ func instantiate_rooms() -> void:
 			if ship_map[x][y] == false:
 				continue			
 			var room = room_scene.instantiate()
-			room.position = Vector2(x, y) * 816 # 48 tile size * 17 (total number of tiles)
-	
+			room.position = Vector2(x, y) * 816 # 48 tile size * 17 (total number of tiles)			
 			if y > 0 and ship_map[x][y - 1] == true:
 				room.north()
 			if y < ship_heigth - 1 and ship_map[x][y + 1] == true:
@@ -145,8 +144,10 @@ func instantiate_rooms() -> void:
 			if x < ship_width - 1 and ship_map[x + 1][y] == true:
 				room.east()
 				
-			if initial_room_position != Vector2(x, y): # initial_room_position to put tutorial?
+			if initial_room_position != Vector2(x, y):
 				room.RoomBuilder = self
+			else:
+				room.show_instructions() # instructions floor to initial room
 			$"..".call_deferred("add_child", room)
 			room_nodes.append(room)
 
