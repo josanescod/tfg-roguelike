@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://carl2yxq0mmt7"]
 
 [ext_resource type="Script" path="res://Scripts/key.gd" id="1_56g3k"]
-[ext_resource type="Texture2D" uid="uid://plnamgo1vblv" path="res://Assets/Spritesheet.png" id="1_h32d8"]
+[ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_2bsmm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qs1eh"]
-size = Vector2(39, 58)
+size = Vector2(38, 19)
 
 [node name="Key" type="Area2D"]
 script = ExtResource("1_56g3k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_h32d8")
+scale = Vector2(3, 3)
+texture = ExtResource("2_2bsmm")
 region_enabled = true
-region_rect = Rect2(970, 597.5, 42, 57)
+region_rect = Rect2(528, 176, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_qs1eh")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

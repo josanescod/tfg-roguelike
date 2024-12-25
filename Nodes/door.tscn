@@ -1,21 +1,22 @@
 [gd_scene load_steps=4 format=3 uid="uid://c5wxwxml76ocn"]
 
 [ext_resource type="Script" path="res://Scripts/door.gd" id="1_uxtxp"]
-[ext_resource type="Texture2D" uid="uid://plnamgo1vblv" path="res://Assets/Spritesheet.png" id="2_smbgb"]
+[ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_3cfor"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_731ya"]
-size = Vector2(58, 63)
+size = Vector2(42, 43)
 
 [node name="Door" type="Area2D"]
 script = ExtResource("1_uxtxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_smbgb")
+scale = Vector2(3, 3)
+texture = ExtResource("2_3cfor")
 region_enabled = true
-region_rect = Rect2(1218, 576.5, 61, 65)
+region_rect = Rect2(48, 144, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 0.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_731ya")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
