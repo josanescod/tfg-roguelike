@@ -179,7 +179,9 @@ func instantiate_key() -> void:
 	if available_rooms.size() > 0:
 		var random_room_position = available_rooms[randi() % available_rooms.size()]
 		var key = key_scene.instantiate()
-		key.global_position = random_room_position * 816 + Vector2(408, 408)
+		var key_x = randi_range(100, 400)
+		var key_y = randi_range(100, 400)
+		key.global_position = random_room_position * 816 + Vector2(key_x, key_y)
 		$"..".call_deferred("add_child", key)
 		key_position = random_room_position
 
@@ -197,7 +199,9 @@ func instantiate_exit_door() -> void:
 	if available_rooms.size() > 0:
 		var random_room_position = available_rooms[randi() % available_rooms.size()]
 		var door = door_scene.instantiate()
-		door.global_position = random_room_position * 816 + Vector2(408, 408)
+		var door_x = randi_range(100, 400)
+		var door_y = randi_range(100, 400)
+		door.global_position = random_room_position * 816 + Vector2(door_x, door_y) #408
 		$"..".call_deferred("add_child", door)
 		door_position = random_room_position
 		

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://csbootqbcm3nt"]
+[gd_scene load_steps=10 format=3 uid="uid://csbootqbcm3nt"]
 
 [ext_resource type="Script" path="res://Scripts/level_builder.gd" id="1_hm1qq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_c420u"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_f4rc0"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="5_q4ne1"]
 [ext_resource type="Script" path="res://Scripts/enemy_manager.gd" id="5_qtfhy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0ylf"]
@@ -82,3 +83,110 @@ zoom = Vector2(0.5, 0.5)
 libraries = {
 "": SubResource("AnimationLibrary_yklgy")
 }
+
+[node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
+script = ExtResource("5_q4ne1")
+
+[node name="HealthBar" type="Panel" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.278431)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -206.0
+offset_top = 7.0
+offset_right = -53.0
+offset_bottom = 55.0
+grow_horizontal = 0
+
+[node name="Heart1" type="Sprite2D" parent="UI/HealthBar"]
+position = Vector2(26, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_f4rc0")
+hframes = 3
+frame = 2
+region_enabled = true
+region_rect = Rect2(640, 160, 48, 16)
+
+[node name="Heart2" type="Sprite2D" parent="UI/HealthBar"]
+position = Vector2(77, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_f4rc0")
+hframes = 3
+frame = 2
+region_enabled = true
+region_rect = Rect2(640, 160, 48, 16)
+
+[node name="Heart3" type="Sprite2D" parent="UI/HealthBar"]
+position = Vector2(128, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_f4rc0")
+hframes = 3
+frame = 2
+region_enabled = true
+region_rect = Rect2(640, 160, 48, 16)
+
+[node name="StatBar" type="Panel" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.278431)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -206.0
+offset_top = 59.0
+offset_right = -53.0
+offset_bottom = 107.0
+grow_horizontal = 0
+
+[node name="CoinSprite" type="Sprite2D" parent="UI/StatBar"]
+position = Vector2(26, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_f4rc0")
+region_enabled = true
+region_rect = Rect2(656, 48, 16, 16)
+
+[node name="Coins" type="Label" parent="UI/StatBar"]
+layout_mode = 0
+offset_left = 56.0
+offset_top = 6.0
+offset_right = 96.0
+offset_bottom = 41.0
+theme_override_font_sizes/font_size = 25
+text = "0"
+horizontal_alignment = 1
+
+[node name="KeySprite" type="Sprite2D" parent="UI/StatBar"]
+modulate = Color(1, 1, 1, 0.12549)
+position = Vector2(128, 24)
+scale = Vector2(3, 3)
+texture = ExtResource("2_f4rc0")
+region_enabled = true
+region_rect = Rect2(528, 176, 16, 16)
+
+[node name="TimeBar" type="Panel" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.278431)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -106.0
+offset_top = 8.0
+offset_right = 47.0
+offset_bottom = 56.0
+grow_horizontal = 2
+
+[node name="Time" type="Label" parent="UI/TimeBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.287
+offset_left = -73.5
+offset_top = 4.0
+offset_right = 74.5
+offset_bottom = 30.224
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="UI/TimeBar"]
+
+[connection signal="timeout" from="UI/TimeBar/Timer" to="UI" method="_on_timer_timeout"]

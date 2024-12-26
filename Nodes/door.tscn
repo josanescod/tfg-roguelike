@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_731ya"]
 size = Vector2(42, 43)
 
-[node name="Door" type="Area2D"]
+[node name="Door" type="Area2D" groups=["Door"]]
 script = ExtResource("1_uxtxp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

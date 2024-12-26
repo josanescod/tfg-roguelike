@@ -41,6 +41,7 @@ func player_input() -> void:
 			Vector2.LEFT:
 				try_attack(Vector2.LEFT)
 				print("left attack!")
+				print("health: ", Global.health)
 			Vector2.DOWN:
 				try_attack(Vector2.DOWN)
 				print("down attack!")
@@ -59,7 +60,7 @@ func move(direction : Vector2) -> void:
 	var intersection_result = space_state.intersect_ray(ray_query)
 	
 	if intersection_result and intersection_result.collider.is_in_group("Wall"):
-		return			
+		return
 	else:
 		position += 48 * direction
 		player_moved.emit()
