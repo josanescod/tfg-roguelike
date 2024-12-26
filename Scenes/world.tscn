@@ -118,7 +118,7 @@ libraries = {
 "": SubResource("AnimationLibrary_yklgy")
 }
 
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemy"]]
+[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemy", "Wall"]]
 position = Vector2(316, 80)
 script = ExtResource("4_qa1ox")
 

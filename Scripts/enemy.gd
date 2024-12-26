@@ -42,13 +42,14 @@ func get_random_direction() -> Vector2:
 			return Vector2.RIGHT
 	
 	return Vector2.ZERO
-		
 
 func take_damage(damage_taken : int) -> void:
 	health -= damage_taken
 	$AnimationPlayer.play("Hit")
 	print('Enemy health: ', health)
 	if health <= 0:
+		# Inform the player to remove this enemy from the list
+		player.remove_enemy(self)
 		queue_free()
 	
 	if randf() > attack_chance:

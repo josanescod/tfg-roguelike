@@ -9,6 +9,8 @@ var has_key : bool = false
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
 
+var enemies = []
+
 # Main function to be executed in each physics frame
 func _physics_process(_delta):
 	player_input()
@@ -31,7 +33,7 @@ func player_input() -> void:
 	
 	if move_direction != Vector2.ZERO:
 		last_direction = move_direction
-		print("last direction:", last_direction)
+		# print("last direction:", last_direction)
 	
 	# space bar and last direction 
 	if Input.is_action_just_pressed("attack"):
@@ -80,3 +82,7 @@ func take_damage(damage_taken : int) -> void:
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
 		get_tree().reload_current_scene()
+
+# Function to remove the enemy from the list
+func remove_enemy(enemy):
+	enemies.erase(enemy)
