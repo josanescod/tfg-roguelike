@@ -3,6 +3,7 @@ extends Node
 @onready var room_scene : PackedScene = load("res://Nodes/room.tscn")
 @onready var door_scene : PackedScene = load("res://Nodes/door.tscn")
 @onready var key_scene : PackedScene = load("res://Nodes/key.tscn")
+#@onready var enemy_scene : PackedScene = load("res://Nodes/enemy.tscn")
 
 var ship_width : int = 7
 var ship_heigth : int = 7
@@ -21,6 +22,7 @@ var room_nodes: Array
 var player_position: Vector2
 var key_position: Vector2
 var door_position: Vector2
+var enemy_position: Vector2
 
 # Procedural generation algorithms
 enum GenerationAlgorithm {
@@ -52,9 +54,11 @@ func generate(algorithm: int) -> void:
 				
 	instantiate_rooms()
 	$"../Player".global_position = (initial_room_position * 816) + Vector2(262, 262)
-	# test key and door
+	# test key and door and enemy
 	instantiate_key()
 	instantiate_exit_door()
+#	instantiate_enemy()
+
 
 
 # Ramdom Walk 
@@ -185,3 +189,19 @@ func instantiate_exit_door() -> void:
 		door.global_position = random_room_position * 816 + Vector2(408, 408)
 		$"..".call_deferred("add_child", door)
 		door_position = random_room_position
+		
+#func instantiate_enemy() -> void:
+#		var available_rooms = []
+#		for x in range(ship_width):
+#			for y in range(ship_heigth):
+#				if ship_map[x][y]:
+#					var room_position = Vector2(x, y)
+#					# Exclude Player's room and exit_door's room
+#					if room_position != player_position:
+#						available_rooms.append(room_position)
+#		if available_rooms.size() > 0:
+#			var random_room_position = available_rooms[randi() % available_rooms.size()]
+#			var enemy = enemy_scene.instantiate()
+#			enemy.global_position = random_room_position * 816 + Vector2(408, 408)
+#			$"..".call_deferred("add_child", enemy)
+#			enemy_position = random_room_position

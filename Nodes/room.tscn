@@ -2184,56 +2184,56 @@ sources/0 = SubResource("TileSetAtlasSource_2at4q")
 [node name="Room" type="Node2D"]
 script = ExtResource("1_4uh3v")
 
-[node name="TemplateWalls" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="TemplateWalls" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAAAAAAAgAQABMAAAAAAAoAAgAQABUAAAAAAAIAAgAQABQAAAAAAAcAAgAQABQAAAAAAAgAAgAQABQAAAAAAAkAAgAQABQAAAABAAAAAgARABMAAAACAAAAAgARABMAAAADAAAAAgARABMAAAAIAAAAAgARABMAAAAJAAAAAgARABMAAAABAAoAAgARABUAAAACAAoAAgARABUAAAADAAoAAgARABUAAAAHAAoAAgARABUAAAAIAAoAAgARABUAAAAJAAoAAgARABUAAAAAAAEAAgAQABQAAAAHAAAAAgARABMAAAAKAAAAAgASABMAAAAKAAoAAgASABUAAAAKAAkAAgASABQAAAAKAAgAAgASABQAAAAKAAcAAgASABQAAAAKAAMAAgASABQAAAAKAAIAAgASABQAAAAKAAEAAgASABQAAAAAAAMAAgAQABQAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="NorthWall" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="NorthWall" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAEAAAAAgARABMAAAAFAAAAAgARABMAAAAGAAAAAgARABMAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="NorthDoor" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="NorthDoor" type="TileMapLayer" parent="." groups=["Wall"]]
 visible = false
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAADAP//AgASABQAAAADAP7/AgASABQAAAADAP3/AgASABQAAAAHAP3/AgAQABQAAAAHAP7/AgAQABQAAAAHAP//AgAQABQAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="EastWall" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="EastWall" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAKAAQAAgASABQAAAAKAAUAAgASABQAAAAKAAYAAgASABQAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="EastDoor" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="EastDoor" type="TileMapLayer" parent="." groups=["Wall"]]
 visible = false
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAALAAMAAgARABUAAAAMAAMAAgARABUAAAANAAMAAgARABUAAAALAAcAAgARABMAAAAMAAcAAgARABMAAAANAAcAAgARABMAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="SouthWall" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="SouthWall" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAEAAoAAgARABUAAAAFAAoAAgARABUAAAAGAAoAAgARABUAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="SouthDoor" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="SouthDoor" type="TileMapLayer" parent="." groups=["Wall"]]
 visible = false
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAADAAsAAgASABQAAAADAAwAAgASABQAAAADAA0AAgASABQAAAAHAAsAAgAQABQAAAAHAAwAAgAQABQAAAAHAA0AAgAQABQAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="WestWall" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="WestWall" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAAAAQAAgAQABQAAAAAAAUAAgAQABQAAAAAAAYAAgAQABQAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="WestDoor" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="WestDoor" type="TileMapLayer" parent="." groups=["Wall"]]
 visible = false
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAD//wMAAgARABUAAAD+/wMAAgARABUAAAD9/wMAAgARABUAAAD//wcAAgARABMAAAD+/wcAAgARABMAAAD9/wcAAgARABMAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
-[node name="Instructions_Floor" type="TileMapLayer" parent="." groups=["ShipWall"]]
+[node name="Instructions_Floor" type="TileMapLayer" parent="." groups=["Wall"]]
 visible = false
 modulate = Color(1, 1, 1, 0.179)
 scale = Vector2(3, 3)
