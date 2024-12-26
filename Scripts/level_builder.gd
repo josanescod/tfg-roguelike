@@ -22,7 +22,18 @@ var room_nodes: Array
 var player_position: Vector2
 var key_position: Vector2
 var door_position: Vector2
-var enemy_position: Vector2
+#var enemy_position: Vector2
+
+# probability of each object being spawned
+@export var enemy_spawn_probability : float
+@export var coin_spawn_probability: float
+@export var heart_spawn_probability : float
+
+# number of objects per room
+@export var max_enemies_per_room: int
+@export var max_coins_per_room: int
+@export var max_hearts_per_room: int
+
 
 # Procedural generation algorithms
 enum GenerationAlgorithm {
@@ -149,9 +160,9 @@ func instantiate_rooms() -> void:
 				room.east()
 				
 			if initial_room_position != Vector2(x, y):
-				room.RoomBuilder = self
+				room.LevelBuilder = self
 			else:
-				room.show_instructions() # instructions floor to initial room
+				room.show_instructions_on_the_floor()
 			$"..".call_deferred("add_child", room)
 			room_nodes.append(room)
 

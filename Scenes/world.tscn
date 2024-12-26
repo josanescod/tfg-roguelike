@@ -1,9 +1,8 @@
-[gd_scene load_steps=14 format=3 uid="uid://csbootqbcm3nt"]
+[gd_scene load_steps=9 format=3 uid="uid://csbootqbcm3nt"]
 
+[ext_resource type="Script" path="res://Scripts/level_builder.gd" id="1_hm1qq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_c420u"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_f4rc0"]
-[ext_resource type="Script" path="res://Scripts/enemy.gd" id="4_qa1ox"]
-[ext_resource type="Script" path="res://Scripts/builder_level.gd" id="4_sw0u1"]
 [ext_resource type="Script" path="res://Scripts/enemy_manager.gd" id="5_qtfhy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0ylf"]
@@ -46,52 +45,18 @@ _data = {
 "RESET": SubResource("Animation_jko47")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_upukm"]
-size = Vector2(32, 42)
-
-[sub_resource type="Animation" id="Animation_06x7v"]
-resource_name = "Hit"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0.529412, 0, 0, 1), Color(1, 1, 1, 1), Color(0.529412, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_a8v8i"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.529412, 0, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yr5u0"]
-_data = {
-"Hit": SubResource("Animation_06x7v"),
-"RESET": SubResource("Animation_a8v8i")
-}
-
 [node name="World" type="Node2D"]
 
-[node name="BuilderLevel" type="Node" parent="."]
-script = ExtResource("4_sw0u1")
+[node name="LevelBuilder" type="Node" parent="."]
+script = ExtResource("1_hm1qq")
+enemy_spawn_probability = 0.7
+coin_spawn_probability = 0.8
+heart_spawn_probability = 0.3
+max_enemies_per_room = 1
+max_coins_per_room = 2
+max_hearts_per_room = 1
 
-[node name="EnemyManager" type="Node" parent="."]
+[node name="EnemyManager" type="Node" parent="." groups=["Enemy_Manager"]]
 script = ExtResource("5_qtfhy")
 
 [node name="Player" type="CharacterBody2D" parent="." groups=["Player"]]
@@ -111,28 +76,9 @@ position = Vector2(0.5, 3.5)
 shape = SubResource("RectangleShape2D_b0ylf")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.45, 0.45)
+zoom = Vector2(0.5, 0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
 "": SubResource("AnimationLibrary_yklgy")
-}
-
-[node name="Enemy" type="CharacterBody2D" parent="." groups=["Enemy", "Wall"]]
-position = Vector2(316, 80)
-script = ExtResource("4_qa1ox")
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
-modulate = Color(0.529412, 0, 0, 1)
-scale = Vector2(3, 3)
-texture = ExtResource("2_f4rc0")
-region_enabled = true
-region_rect = Rect2(400, 0, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
-shape = SubResource("RectangleShape2D_upukm")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Enemy"]
-libraries = {
-"": SubResource("AnimationLibrary_yr5u0")
 }
