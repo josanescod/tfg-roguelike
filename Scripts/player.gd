@@ -63,8 +63,8 @@ func move(direction : Vector2) -> void:
 		return
 	else:
 		position += 48 * direction
-		player_moved.emit()
 		check_enemy_proximity()
+		player_moved.emit()
 
 # Attack
 func try_attack(direction : Vector2) -> void:
@@ -84,7 +84,11 @@ func take_damage(damage_taken : int) -> void:
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
 		print("Player is dead")
-		get_tree().reload_current_scene()
+		call_deferred("reload_scene")
+
+func reload_scene() -> void:
+	#get_tree().reload_current_scene()
+	print("The end.")
 
 func check_enemy_proximity() -> void:
 	# all possible directions
@@ -99,7 +103,7 @@ func check_enemy_proximity() -> void:
 		if intersection_result:
 			if intersection_result.collider.is_in_group("Enemy"):
 				print("Enemy detected in direction ", direction)
-				Global.health -= 1
+				take_damage(1)
 				print("proximity attack!")
 				print("health: ", Global.health)
 
