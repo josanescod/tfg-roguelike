@@ -84,11 +84,14 @@ func take_damage(damage_taken : int) -> void:
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
 		print("Player is dead")
+		Global.level = 1
+		Global.health = Global.max_health
+		Global.coins = 0
 		call_deferred("reload_scene")
 
 func reload_scene() -> void:
-	#get_tree().reload_current_scene()
 	print("The end.")
+	get_tree().reload_current_scene()
 
 func check_enemy_proximity() -> void:
 	# all possible directions

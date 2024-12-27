@@ -20,8 +20,8 @@ var ship_map : Array
 var room_nodes: Array
 
 var player_position: Vector2
-var key_position: Vector2
-var door_position: Vector2
+# var key_position: Vector2
+# var door_position: Vector2
 #var enemy_position: Vector2
 
 # probability of each object being spawned
@@ -64,11 +64,11 @@ func generate(algorithm: int) -> void:
 			algorithm_execution_time = measure_time(generate_cellular)			
 				
 	instantiate_rooms()
+	player_position = Vector2(init_x, init_y)
 	$"../Player".global_position = (initial_room_position * 816) + Vector2(262, 262)
-	# test key and door and enemy
-	instantiate_key()
-	instantiate_exit_door()
-#	instantiate_enemy()
+	get_tree().create_timer(1)
+	instantiate_key_and_exit_door()
+
 
 
 
@@ -167,40 +167,38 @@ func instantiate_rooms() -> void:
 			room_nodes.append(room)
 
 
-func instantiate_key() -> void:
-	var available_rooms = []
-	for x in range(ship_width):
-		for y in range(ship_heigth):
-			if ship_map[x][y]:
-				var room_position = Vector2(x, y)
-				# Exclude Player's room and exit_door's room
-				if room_position != player_position and room_position != key_position:
-					available_rooms.append(room_position)
-	if available_rooms.size() > 0:
-		var random_room_position = available_rooms[randi() % available_rooms.size()]
-		var key = key_scene.instantiate()
-		var key_x = randi_range(100, 400)
-		var key_y = randi_range(100, 400)
-		key.global_position = random_room_position * 816 + Vector2(key_x, key_y)
-		$"..".call_deferred("add_child", key)
-		key_position = random_room_position
-
-
-func instantiate_exit_door() -> void:
-	# list available rooms
+func instantiate_key_and_exit_door() -> void:
 	var available_rooms = []
 	for x in range (ship_width):
 		for y in range (ship_heigth):
 			if ship_map[x][y]:
 				var room_position = Vector2(x,y)
 				# Exclude Player's room and key's room
-				if room_position != player_position and room_position != key_position:
+				if room_position != player_position:
 					available_rooms.append(room_position)
-	if available_rooms.size() > 0:
-		var random_room_position = available_rooms[randi() % available_rooms.size()]
-		var door = door_scene.instantiate()
-		var door_x = randi_range(100, 400)
-		var door_y = randi_range(100, 400)
-		door.global_position = random_room_position * 816 + Vector2(door_x, door_y) #408
-		$"..".call_deferred("add_child", door)
-		door_position = random_room_position
+	if available_rooms.size() > 1:
+		# maximum distance between rooms
+		var max_distance = -1
+		var key_room = null
+		var exit_door_room = null
+		for i in range(available_rooms.size()):
+			for j in range(i + 1, available_rooms.size()):
+				var distance = available_rooms[i].distance_to(available_rooms[j])
+				if distance > max_distance:
+					key_room = available_rooms[i]
+					exit_door_room = available_rooms[j]
+		print("Key Room:", key_room, "Exit Door Room:", exit_door_room)
+		# key
+		if key_room:
+			var key = key_scene.instantiate()
+			var key_x = randi_range(100,400)
+			var key_y = randi_range(100,400)
+			key.global_position = key_room * 816 + Vector2(key_x, key_y)
+			$"..".call_deferred("add_child", key)
+		# exit_door
+		if exit_door_room:
+			var exit_door = door_scene.instantiate()
+			var exit_door_x = randi_range(100,400)
+			var exit_door_y = randi_range(100,400)
+			exit_door.global_position = exit_door_room * 816 + Vector2(exit_door_x, exit_door_y)
+			$"..".call_deferred("add_child", exit_door)
