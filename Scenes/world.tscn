@@ -1,15 +1,16 @@
-[gd_scene load_steps=10 format=3 uid="uid://csbootqbcm3nt"]
+[gd_scene load_steps=11 format=3 uid="uid://csbootqbcm3nt"]
 
 [ext_resource type="Script" path="res://Scripts/level_builder.gd" id="1_hm1qq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_c420u"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_f4rc0"]
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="5_q4ne1"]
 [ext_resource type="Script" path="res://Scripts/enemy_manager.gd" id="5_qtfhy"]
+[ext_resource type="FontFile" uid="uid://dho5idw3u4c35" path="res://Assets/Kenney Pixel.ttf" id="6_5l5eh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b0ylf"]
 size = Vector2(37, 39)
 
-[sub_resource type="Animation" id="Animation_rmdbq"]
+[sub_resource type="Animation" id="Animation_yejyh"]
 resource_name = "Hit"
 length = 0.2
 tracks/0/type = "value"
@@ -22,10 +23,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0.992157, 0.835294, 0.811765, 1), Color(1, 0, 0, 1), Color(0.992157, 0.835294, 0.811765, 1)]
+"values": [Color(0.992157, 0.835294, 0.811765, 1), Color(0.529412, 0, 0, 1), Color(0.992157, 0.835294, 0.811765, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_jko47"]
+[sub_resource type="Animation" id="Animation_6lj36"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,10 +41,10 @@ tracks/0/keys = {
 "values": [Color(0.992157, 0.835294, 0.811765, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_yklgy"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nn41w"]
 _data = {
-"Hit": SubResource("Animation_rmdbq"),
-"RESET": SubResource("Animation_jko47")
+"Hit": SubResource("Animation_yejyh"),
+"RESET": SubResource("Animation_6lj36")
 }
 
 [node name="World" type="Node2D"]
@@ -66,6 +67,7 @@ script = ExtResource("2_c420u")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player"]
 modulate = Color(0.992157, 0.835294, 0.811765, 1)
+self_modulate = Color(0.986669, 0.987356, 0.998406, 1)
 position = Vector2(0.500008, -0.387497)
 scale = Vector2(4.688, 3)
 texture = ExtResource("2_f4rc0")
@@ -77,11 +79,11 @@ position = Vector2(0.5, 3.5)
 shape = SubResource("RectangleShape2D_b0ylf")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.6, 0.6)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
-"": SubResource("AnimationLibrary_yklgy")
+"": SubResource("AnimationLibrary_nn41w")
 }
 
 [node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
@@ -93,9 +95,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -206.0
-offset_top = 7.0
+offset_top = 8.0
 offset_right = -53.0
-offset_bottom = 55.0
+offset_bottom = 56.0
 grow_horizontal = 0
 
 [node name="Heart1" type="Sprite2D" parent="UI/HealthBar"]
@@ -146,12 +148,14 @@ region_rect = Rect2(656, 48, 16, 16)
 [node name="Coins" type="Label" parent="UI/StatBar"]
 layout_mode = 0
 offset_left = 56.0
-offset_top = 6.0
+offset_top = 3.0
 offset_right = 96.0
-offset_bottom = 41.0
-theme_override_font_sizes/font_size = 25
+offset_bottom = 42.0
+theme_override_fonts/font = ExtResource("6_5l5eh")
+theme_override_font_sizes/font_size = 50
 text = "0"
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="KeySprite" type="Sprite2D" parent="UI/StatBar"]
 modulate = Color(1, 1, 1, 0.12549)
@@ -166,9 +170,9 @@ self_modulate = Color(1, 1, 1, 0.278431)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -106.0
+offset_left = -54.0
 offset_top = 8.0
-offset_right = 47.0
+offset_right = 99.0
 offset_bottom = 56.0
 grow_horizontal = 2
 
@@ -183,10 +187,47 @@ offset_top = 4.0
 offset_right = 74.5
 offset_bottom = 30.224
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 25
+theme_override_fonts/font = ExtResource("6_5l5eh")
+theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="UI/TimeBar"]
+
+[node name="MiniMap" type="Panel" parent="UI"]
+self_modulate = Color(1, 1, 1, 0.278431)
+offset_left = 52.0
+offset_top = 8.0
+offset_right = 252.0
+offset_bottom = 208.0
+
+[node name="GridContainer" type="GridContainer" parent="UI/MiniMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 11.0
+offset_top = 36.0
+offset_right = -12.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 6
+
+[node name="Label" type="Label" parent="UI/MiniMap"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_5l5eh")
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="timeout" from="UI/TimeBar/Timer" to="UI" method="_on_timer_timeout"]
