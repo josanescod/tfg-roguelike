@@ -64,6 +64,7 @@ func move(direction : Vector2) -> void:
 	else:
 		position += 48 * direction
 		player_moved.emit()
+		check_enemy_proximity()
 
 # Attack
 func try_attack(direction : Vector2) -> void:
@@ -82,7 +83,25 @@ func take_damage(damage_taken : int) -> void:
 	print('Player health: ', Global.health)
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
+		print("Player is dead")
 		get_tree().reload_current_scene()
+
+func check_enemy_proximity() -> void:
+	# all possible directions
+	var directions = [Vector2.LEFT, Vector2.RIGHT, Vector2.UP, Vector2.DOWN,Vector2(1, 1), Vector2(-1, 1), Vector2(1, -1), Vector2(-1, -1)]
+	# Raycasting to all directions
+	for direction in directions:
+		var space_rid = get_world_2d().space
+		var space_state = PhysicsServer2D.space_get_direct_state(space_rid)
+		var ray_query = PhysicsRayQueryParameters2D.create(global_position, global_position + 48 * direction)
+		var intersection_result = space_state.intersect_ray(ray_query)
+		# proximity damage
+		if intersection_result:
+			if intersection_result.collider.is_in_group("Enemy"):
+				print("Enemy detected in direction ", direction)
+				Global.health -= 1
+				print("proximity attack!")
+				print("health: ", Global.health)
 
 # Function to remove the enemy from the list
 func remove_enemy(enemy):

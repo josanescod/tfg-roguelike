@@ -51,5 +51,7 @@ func take_damage(damage_taken : int) -> void:
 		queue_free()
 	
 	if randf() > attack_chance:
+		print("counterattack damage!")
 		player.take_damage(damage)
+		print("health: ", Global.health)
 		

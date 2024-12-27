@@ -204,19 +204,3 @@ func instantiate_exit_door() -> void:
 		door.global_position = random_room_position * 816 + Vector2(door_x, door_y) #408
 		$"..".call_deferred("add_child", door)
 		door_position = random_room_position
-		
-#func instantiate_enemy() -> void:
-#		var available_rooms = []
-#		for x in range(ship_width):
-#			for y in range(ship_heigth):
-#				if ship_map[x][y]:
-#					var room_position = Vector2(x, y)
-#					# Exclude Player's room and exit_door's room
-#					if room_position != player_position:
-#						available_rooms.append(room_position)
-#		if available_rooms.size() > 0:
-#			var random_room_position = available_rooms[randi() % available_rooms.size()]
-#			var enemy = enemy_scene.instantiate()
-#			enemy.global_position = random_room_position * 816 + Vector2(408, 408)
-#			$"..".call_deferred("add_child", enemy)
-#			enemy_position = random_room_position
