@@ -48,6 +48,7 @@ func take_damage(damage_taken : int) -> void:
 	if health <= 0:
 		# Inform the player to remove this enemy from the list
 		player.remove_enemy(self)
+		Global.enemies_defeated += 1
 		queue_free()
 	
 	if randf() > attack_chance:
