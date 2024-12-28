@@ -94,7 +94,7 @@ func take_damage(damage_taken : int) -> void:
 		call_deferred("reload_scene")
 
 func reload_scene() -> void:
-	print("The end.")
+	print("You died!")
 	get_tree().change_scene_to_file("res://Scenes/death_menu.tscn")
 
 func check_enemy_proximity() -> void:
