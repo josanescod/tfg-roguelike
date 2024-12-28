@@ -69,7 +69,7 @@ func _on_timer_timeout() -> void:
 	#$"TimeBar/Time".text = '%02d:%02d:%02d' % [minutes, seconds, milliseconds]
 	$"TimeBar/Time".text = '%02d:%02d' % [minutes, seconds]
 	
-func on_player_escaped() -> void:
+func on_timer_stoped() -> void:
 	$"TimeBar/Timer".stop()
 	#print("Total time: ", $"TimeBar/Time".text)
 
@@ -94,3 +94,12 @@ func update_minimap() -> void:
 			panel.modulate = "ffffff"
 		if panel.pos == pos:
 			panel.modulate = "fdd5cf"
+
+
+func _on_continue_pressed() -> void:
+	$PauseMenu.visible = false
+	$TimeBar/Timer.paused = false
+	Global.game_paused = false
+
+func _on_exit_game_pressed() -> void:
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

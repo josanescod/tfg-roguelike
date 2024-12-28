@@ -14,6 +14,8 @@ func check_enemies() -> void:
 	enemies = get_tree().get_nodes_in_group("Enemy")
 
 func on_player_moved() -> void:
+	if Global.game_paused:
+		return
 	# To filter out any null or freed enemies
 	enemies = enemies.filter(func (enemy): return enemy != null )
 	for enemy in enemies:

@@ -13,6 +13,8 @@ var enemies = []
 
 # Main function to be executed in each physics frame
 func _physics_process(_delta):
+	if Global.game_paused:
+		return
 	player_input()
 
 # Function to manage player input and determine the direction of motion

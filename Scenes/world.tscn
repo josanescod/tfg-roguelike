@@ -230,4 +230,59 @@ theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="PauseMenu" type="Panel" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -76.5
+offset_top = -75.0
+offset_right = 76.5
+offset_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PauseLabel" type="Label" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_right = 47.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_5l5eh")
+theme_override_font_sizes/font_size = 40
+text = "PAUSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.5
+offset_top = -33.0
+offset_right = 45.5
+offset_bottom = 33.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Continue" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "CONTINUE
+"
+
+[node name="ExitGame" type="Button" parent="UI/PauseMenu/VBoxContainer"]
+layout_mode = 2
+text = "EXIT GAME
+"
+
 [connection signal="timeout" from="UI/TimeBar/Timer" to="UI" method="_on_timer_timeout"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/Continue" to="UI" method="_on_continue_pressed"]
+[connection signal="pressed" from="UI/PauseMenu/VBoxContainer/ExitGame" to="UI" method="_on_exit_game_pressed"]

@@ -47,6 +47,20 @@ func _ready():
 	generate(GenerationAlgorithm.RANDOM_WALK)
 	test_generate_rooms() 
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		print("pressing ESC")
+		if Global.game_paused == false:
+			print("Showing Pause Menu")
+			$"../UI/PauseMenu".visible = true
+			$"../UI/TimeBar/Timer".paused = true
+			Global.game_paused = true
+		else:
+			print("Hiding Pause Menu")
+			$"../UI/PauseMenu".visible = false
+			$"../UI/TimeBar/Timer".paused = false
+			Global.game_paused = false
+
 func initialize_map():
 	ship_map.clear()
 	for i in range(ship_width):
@@ -68,8 +82,6 @@ func generate(algorithm: int) -> void:
 	$"../Player".global_position = (initial_room_position * 816) + Vector2(262, 262)
 	get_tree().create_timer(1)
 	instantiate_key_and_exit_door()
-
-
 
 
 # Ramdom Walk 
