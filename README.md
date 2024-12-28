@@ -31,3 +31,19 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 - key.ogg -> power_up_04.ogg
 - next_room.ogg -> synth_misc_05.ogg
 - walk.ogg -> synth_misc_15.ogg
+
+- Win Sound Effect by Listener (https://opengameart.org/content/win-sound-effect)
+- License: Creative Commons Zero, CC0
+
+#### List of Original File Names Modified
+
+- victory.ogg -> Win sound.wav
+
+### Background Music
+
+- Long Away Home \[8bit\] by nene (https://opengameart.org/content/long-away-home-8bit)
+- License: Creative Commons Zero, CC0
+
+#### List of Original File Names Modified
+
+- long_away_home.ogg -> Long Away Home.wav

@@ -45,18 +45,20 @@ enum GenerationAlgorithm {
 func _ready():
 	initialize_map()
 	generate(GenerationAlgorithm.RANDOM_WALK)
-	test_generate_rooms() 
+	test_generate_rooms()
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
 		print("pressing ESC")
 		if Global.game_paused == false:
 			print("Showing Pause Menu")
+			Sfx.get_child(5).stop()
 			$"../UI/PauseMenu".visible = true
 			$"../UI/TimeBar/Timer".paused = true
 			Global.game_paused = true
 		else:
 			print("Hiding Pause Menu")
+			Sfx.get_child(5).play()
 			$"../UI/PauseMenu".visible = false
 			$"../UI/TimeBar/Timer".paused = false
 			Global.game_paused = false

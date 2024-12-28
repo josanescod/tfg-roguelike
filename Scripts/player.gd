@@ -11,6 +11,11 @@ var last_direction : Vector2 = Vector2.UP
 
 var enemies = []
 
+func _ready() -> void:
+	# background music
+	Sfx.get_child(5).play()
+
+
 # Main function to be executed in each physics frame
 func _physics_process(_delta):
 	if Global.game_paused:
@@ -95,6 +100,7 @@ func take_damage(damage_taken : int) -> void:
 
 func reload_scene() -> void:
 	print("You died!")
+	Sfx.get_child(5).stop()
 	get_tree().change_scene_to_file("res://Scenes/death_menu.tscn")
 
 func check_enemy_proximity() -> void:
