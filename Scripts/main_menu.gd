@@ -17,6 +17,7 @@ func _on_algo_1_pressed() -> void:
 	Global.level = 1
 	Global.coins = 0
 	Global.enemies_defeated = 0
+	Global.game_paused = false
 	get_tree().change_scene_to_file("res://Scenes/world.tscn")
 
 

@@ -4,6 +4,7 @@ extends Area2D
 func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		if body.has_key:
+			Sfx.get_child(3).play()
 			print("You have finished this level!")
 			Global.level +=1
 			get_tree().get_first_node_in_group("UI").on_timer_stoped()

@@ -42,6 +42,8 @@ func get_random_direction() -> Vector2:
 	return Vector2.ZERO
 
 func take_damage(damage_taken : int) -> void:
+	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
+	$SFX.play()
 	health -= damage_taken
 	$AnimationPlayer.play("Hit")
 	print('Enemy health: ', health)

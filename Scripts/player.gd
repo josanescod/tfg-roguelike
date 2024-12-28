@@ -65,6 +65,8 @@ func move(direction : Vector2) -> void:
 		return
 	else:
 		position += 48 * direction
+		$SFX.stream = load("res://Assets/Sounds/walk.ogg")
+		$SFX.play()
 		check_enemy_proximity()
 		player_moved.emit()
 
@@ -83,8 +85,11 @@ func try_attack(direction : Vector2) -> void:
 func take_damage(damage_taken : int) -> void:
 	Global.health -= damage_taken
 	print('Player health: ', Global.health)
+	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
+	$SFX.play()
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
+		Sfx.get_child(4).play()
 		print("Player is dead")
 		call_deferred("reload_scene")
 
