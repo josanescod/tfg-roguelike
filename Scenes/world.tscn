@@ -260,7 +260,7 @@ offset_bottom = 39.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("6_5l5eh")
 theme_override_font_sizes/font_size = 40
-text = "PAUSE"
+text = "BTN_PAUSE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -280,12 +280,12 @@ grow_vertical = 2
 
 [node name="Continue" type="Button" parent="UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
-text = "CONTINUE
+text = "BTN_CONTINUE
 "
 
 [node name="EndGame" type="Button" parent="UI/PauseMenu/VBoxContainer"]
 layout_mode = 2
-text = "END GAME
+text = "BTN_ENDGAME
 "
 
 [connection signal="timeout" from="UI/TimeBar/Timer" to="UI" method="_on_timer_timeout"]

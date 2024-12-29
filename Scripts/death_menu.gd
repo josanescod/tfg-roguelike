@@ -2,7 +2,11 @@ extends Control
 
 
 func _ready() -> void:
-	$Start/Buttons/Stats.text = "Level Reached: " + str(Global.level) + "\nEnemies Defeated: " + str(Global.enemies_defeated) + "\nCoins Collected: " + str(Global.coins)
+	$Start/MsgDied.text = tr("MSG_DIED")
+	$Start/Stats/Stats1.text = tr("STAT_LEVEL") + ": " + str(Global.level) 
+	$Start/Stats/Stats2.text = tr("STAT_ENEMIES") + ": " + str(Global.enemies_defeated)
+	$Start/Stats/Stats3.text =  tr("STAT_COINS") + ": "  + str(Global.coins)
+	$Start/Buttons/BackMenu.text = tr("BTN_MENU")
 
 
 

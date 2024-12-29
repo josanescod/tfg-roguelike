@@ -1,0 +1,16 @@
+keys,en,es,ca
+BTN_PLAY,PLAY,JUGAR,JUGAR
+BTN_QUIT,QUIT,SALIR,SORTIR
+BTN_ALGO,ALGORITHM,ALGORITMO,ALGORITME
+BTN_LANG,EN,ES,CA
+BTN_BACK,BACK,VOLVER,TORNAR
+BTN_PAUSE,PAUSE,PAUSA,PAUSA
+BTN_CONTINUE,CONTINUE,CONTINUAR,CONTINUAR
+BTN_ENDGAME,END,FINALIZAR,FINALITZAR
+BTN_MENU,MENU,MENU,MENU
+INFO_LEVEL,LEVEL,NIVEL,NIVELL
+MSG_DIED,You almost did it!,¡Casi lo logras!,Per poc ho aconsegueixes!
+MSG_WON,Great job!,¡Buen trabajo!,Bona feina!
+STAT_LEVEL,Level reached,Nivel alcanzado,Nivell assolit
+STAT_ENEMIES,Enemies defeated,Enemigos derrotados,Enemics derrotats
+STAT_COINS,Coins collected,Monedas recolectadas,Monedes aconseguides

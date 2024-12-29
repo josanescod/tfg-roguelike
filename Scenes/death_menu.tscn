@@ -1105,13 +1105,15 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8aleu")
 
 [node name="Base1" type="TileMapLayer" parent="." groups=["Wall"]]
 scale = Vector2(3, 3)
-tile_map_data = PackedByteArray("AAAAAAAAAgAQABMAAAAAAAoAAgAQABQAAAAAAAIAAgAQABQAAAAAAAcAAgAQABQAAAAAAAgAAgAQABQAAAAAAAkAAgAQABQAAAABAAAAAgARABMAAAACAAAAAgARABMAAAADAAAAAgARABMAAAAIAAAAAgARABMAAAAJAAAAAgARABMAAAAAAAEAAgAQABQAAAAHAAAAAgARABMAAAAKAAAAAgARABMAAAAAAAMAAgAQABQAAAAXAAAAAgASABMAAAALAAAAAgARABMAAAAMAAAAAgARABMAAAANAAAAAgARABMAAAAOAAAAAgARABMAAAAPAAAAAgARABMAAAAQAAAAAgARABMAAAARAAAAAgARABMAAAASAAAAAgARABMAAAATAAAAAgARABMAAAAUAAAAAgARABMAAAAVAAAAAgARABMAAAAWAAAAAgARABMAAAAAAAQAAgAQABQAAAAAAAUAAgAQABQAAAAAAAYAAgAQABQAAAAAAAsAAgAQABQAAAAAAAwAAgAQABUAAAAEAAAAAgARABMAAAAFAAAAAgARABMAAAAGAAAAAgARABMAAAAXAAEAAgASABQAAAAXAAIAAgASABQAAAAXAAMAAgASABQAAAAXAAQAAgASABQAAAAXAAUAAgASABQAAAAXAAYAAgASABQAAAAXAAcAAgASABQAAAAXAAgAAgASABQAAAAXAAkAAgASABQAAAAXAAoAAgASABQAAAAXAAsAAgASABQAAAAXAAwAAgASABUAAAABAAwAAgARABUAAAACAAwAAgARABUAAAADAAwAAgARABUAAAAEAAwAAgARABUAAAAFAAwAAgARABUAAAAGAAwAAgARABUAAAAHAAwAAgARABUAAAAIAAwAAgARABUAAAAJAAwAAgARABUAAAAKAAwAAgARABUAAAALAAwAAgARABUAAAAMAAwAAgARABUAAAANAAwAAgARABUAAAAOAAwAAgARABUAAAAPAAwAAgARABUAAAAQAAwAAgARABUAAAARAAwAAgARABUAAAASAAwAAgARABUAAAATAAwAAgARABUAAAAUAAwAAgARABUAAAAVAAwAAgARABUAAAAWAAwAAgARABUAAAAOAAMAAgAaAAYAAAA=")
+tile_map_data = PackedByteArray("AAAAAAAAAgAQABMAAAAAAAoAAgAQABQAAAAAAAIAAgAQABQAAAAAAAcAAgAQABQAAAAAAAgAAgAQABQAAAAAAAkAAgAQABQAAAABAAAAAgARABMAAAACAAAAAgARABMAAAADAAAAAgARABMAAAAIAAAAAgARABMAAAAJAAAAAgARABMAAAAAAAEAAgAQABQAAAAHAAAAAgARABMAAAAKAAAAAgARABMAAAAAAAMAAgAQABQAAAAXAAAAAgASABMAAAALAAAAAgARABMAAAAMAAAAAgARABMAAAANAAAAAgARABMAAAAOAAAAAgARABMAAAAPAAAAAgARABMAAAAQAAAAAgARABMAAAARAAAAAgARABMAAAASAAAAAgARABMAAAATAAAAAgARABMAAAAUAAAAAgARABMAAAAVAAAAAgARABMAAAAWAAAAAgARABMAAAAAAAQAAgAQABQAAAAAAAUAAgAQABQAAAAAAAYAAgAQABQAAAAAAAsAAgAQABQAAAAAAAwAAgAQABUAAAAEAAAAAgARABMAAAAFAAAAAgARABMAAAAGAAAAAgARABMAAAAXAAEAAgASABQAAAAXAAIAAgASABQAAAAXAAMAAgASABQAAAAXAAQAAgASABQAAAAXAAUAAgASABQAAAAXAAYAAgASABQAAAAXAAcAAgASABQAAAAXAAgAAgASABQAAAAXAAkAAgASABQAAAAXAAoAAgASABQAAAAXAAsAAgASABQAAAAXAAwAAgASABUAAAABAAwAAgARABUAAAACAAwAAgARABUAAAADAAwAAgARABUAAAAEAAwAAgARABUAAAAFAAwAAgARABUAAAAGAAwAAgARABUAAAAHAAwAAgARABUAAAAIAAwAAgARABUAAAAJAAwAAgARABUAAAAKAAwAAgARABUAAAALAAwAAgARABUAAAAMAAwAAgARABUAAAANAAwAAgARABUAAAAOAAwAAgARABUAAAAPAAwAAgARABUAAAAQAAwAAgARABUAAAARAAwAAgARABUAAAASAAwAAgARABUAAAATAAwAAgARABUAAAAUAAwAAgARABUAAAAVAAwAAgARABUAAAAWAAwAAgARABUAAAARAAEAAgAaAAYAAAA=")
 tile_set = SubResource("TileSet_8wd5h")
 
 [node name="Base2" type="TileMapLayer" parent="." groups=["Wall"]]
@@ -1148,7 +1150,7 @@ offset_bottom = 194.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Start"]
+[node name="MsgDied" type="Label" parent="Start"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -1160,7 +1162,47 @@ offset_bottom = 56.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("3_olla2")
 theme_override_font_sizes/font_size = 60
-text = "You died!"
+text = "MSG_DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats" type="VBoxContainer" parent="Start"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -80.0
+offset_right = 115.5
+offset_bottom = 45.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Stats1" type="Label" parent="Start/Stats"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_olla2")
+theme_override_font_sizes/font_size = 50
+text = "STAT_LEVEL"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats2" type="Label" parent="Start/Stats"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_olla2")
+theme_override_font_sizes/font_size = 50
+text = "STAT_ENEMIES:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stats3" type="Label" parent="Start/Stats"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_olla2")
+theme_override_font_sizes/font_size = 50
+text = "STAT_COINS
+"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1172,29 +1214,18 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -100.0
-offset_top = -25.0
+offset_top = 75.0
 offset_right = 100.0
-offset_bottom = 25.0
+offset_bottom = 125.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
-
-[node name="Stats" type="Label" parent="Start/Buttons"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("3_olla2")
-theme_override_font_sizes/font_size = 50
-text = "Level Reached:
-Enemies defeated:
-Coins collected:
-"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="BackMenu" type="Button" parent="Start/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("3_olla2")
 theme_override_font_sizes/font_size = 50
-text = "BACK TO MENU"
+text = "BTN_MENU"
 
 [connection signal="pressed" from="Start/Buttons/BackMenu" to="." method="_on_back_menu_pressed"]

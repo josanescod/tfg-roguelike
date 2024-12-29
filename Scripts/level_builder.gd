@@ -20,9 +20,6 @@ var ship_map : Array
 var room_nodes: Array
 
 var player_position: Vector2
-# var key_position: Vector2
-# var door_position: Vector2
-#var enemy_position: Vector2
 
 # probability of each object being spawned
 @export var enemy_spawn_probability : float

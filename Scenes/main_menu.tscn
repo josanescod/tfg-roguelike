@@ -1148,23 +1148,6 @@ offset_bottom = 194.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Start"]
-visible = false
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.5
-offset_top = 10.0
-offset_right = 40.5
-offset_bottom = 49.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_sajkt")
-theme_override_font_sizes/font_size = 60
-text = "Select one option"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Buttons" type="VBoxContainer" parent="Start"]
 layout_mode = 1
 anchors_preset = 8
@@ -1185,14 +1168,21 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sajkt")
 theme_override_font_sizes/font_size = 50
-text = "PLAY"
+text = "BTN_PLAY"
+
+[node name="Language" type="Button" parent="Start/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sajkt")
+theme_override_font_sizes/font_size = 50
+text = "BTN_LANG"
 
 [node name="Quit" type="Button" parent="Start/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sajkt")
 theme_override_font_sizes/font_size = 50
-text = "QUIT"
+text = "BTN_QUIT"
 
 [node name="Options" type="Panel" parent="."]
 visible = false
@@ -1210,22 +1200,6 @@ offset_bottom = 194.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="Options"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -40.5
-offset_top = 10.0
-offset_right = 40.5
-offset_bottom = 49.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_sajkt")
-theme_override_font_sizes/font_size = 60
-text = "Start with algorithm"
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Buttons" type="VBoxContainer" parent="Options"]
 layout_mode = 1
 anchors_preset = 8
@@ -1241,29 +1215,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
 
-[node name="Algo1" type="Button" parent="Options/Buttons"]
+[node name="Algo" type="Button" parent="Options/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sajkt")
 theme_override_font_sizes/font_size = 50
-text = "ALGO 1"
-
-[node name="Algo2" type="Button" parent="Options/Buttons"]
-custom_minimum_size = Vector2(200, 50)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("2_sajkt")
-theme_override_font_sizes/font_size = 50
-text = "ALGO 1"
+text = "BTN_ALGO"
 
 [node name="Back" type="Button" parent="Options/Buttons"]
 custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sajkt")
 theme_override_font_sizes/font_size = 50
-text = "BACK"
+text = "BTN_BACK"
 
 [connection signal="pressed" from="Start/Buttons/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Start/Buttons/Language" to="." method="_on_language_pressed"]
 [connection signal="pressed" from="Start/Buttons/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="Options/Buttons/Algo1" to="." method="_on_algo_1_pressed"]
-[connection signal="pressed" from="Options/Buttons/Algo2" to="." method="_on_algo_2_pressed"]
+[connection signal="pressed" from="Options/Buttons/Algo" to="." method="_on_algo_1_pressed"]
 [connection signal="pressed" from="Options/Buttons/Back" to="." method="_on_back_pressed"]

@@ -1,7 +1,12 @@
 extends Control
 
 
-
+func _ready() -> void:
+	TranslationServer.set_locale(Global.language)
+	$Start/Buttons/Play.text = tr("BTN_PLAY")
+	$Start/Buttons/Quit.text = tr("BTN_QUIT")
+	$Options/Buttons/Algo.text = tr("BTN_ALGO")
+	$Options/Buttons/Back.text = tr("BTN_BACK")
 
 func _on_play_pressed() -> void:
 	$Start.visible = false
@@ -28,3 +33,18 @@ func _on_algo_2_pressed() -> void:
 func _on_back_pressed() -> void:
 	$Start.visible = true
 	$Options.visible = false
+
+
+func _on_language_pressed() -> void:
+	if Global.language=="en":
+		$Start/Buttons/Language.text = "es"
+		Global.language = "es"
+
+	elif Global.language=="es":
+		$Start/Buttons/Language.text = "ca"
+		Global.language = "ca"
+
+	else:
+		$Start/Buttons/Language.text = "en"
+		Global.language = "en"
+	get_tree().change_scene_to_file("res://Scenes/main_menu.tscn")

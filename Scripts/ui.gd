@@ -13,6 +13,8 @@ func _ready() -> void:
 	$"TimeBar/Timer".wait_time = 0.1
 	$"TimeBar/Timer".start()
 	generate_mini_map()
+	$PauseMenu/VBoxContainer/Continue.text = tr("BTN_CONTINUE")
+	$PauseMenu/VBoxContainer/EndGame.text = tr("BTN_ENDGAME")
 	
 
 func _process(_delta):
@@ -57,7 +59,7 @@ func _process(_delta):
 			$"HealthBar/Heart2".frame = 0
 			$"HealthBar/Heart3".frame = 0
 
-	$MiniMap/Label.text = "LEVEL " + str(Global.level) 
+	$MiniMap/Label.text = tr("INFO_LEVEL") + " " + str(Global.level) 
 	update_minimap()
 
 # handle time
