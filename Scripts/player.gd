@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
+@onready var bullet_pool = get_node("BulletManager")
 # signal to emit
 signal player_moved
 
 # initial condition Player has not the key
 var has_key : bool = false
+var has_gun : bool = false
+var num_bullets : int = 0
 
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
@@ -44,20 +47,33 @@ func player_input() -> void:
 	
 	# space bar and last direction 
 	if Input.is_action_just_pressed("attack"):
+		get_node("SpawnPoint").position = last_direction*30
 		match last_direction:
 			Vector2.LEFT:
-				try_attack(Vector2.LEFT)
+				if has_gun:
+					shoot_bullet(Vector2.LEFT)
+				else:
+					try_attack(Vector2.LEFT)
 				print("left attack!")
-				print("health: ", Global.health)
 			Vector2.DOWN:
-				try_attack(Vector2.DOWN)
+				if has_gun:
+					shoot_bullet(Vector2.DOWN)
+				else:
+					try_attack(Vector2.DOWN)
 				print("down attack!")
 			Vector2.RIGHT:
-				try_attack(Vector2.RIGHT)
+				if has_gun:
+					shoot_bullet(Vector2.RIGHT)
+				else:
+					try_attack(Vector2.RIGHT)
 				print("right attack!")
 			Vector2.UP:
-				try_attack(Vector2.UP)
+				if has_gun:
+					shoot_bullet(Vector2.UP)
+				else:
+					try_attack(Vector2.UP)
 				print("up attack!")
+		print("health: ", Global.health)
 
 # Function to move the character in the specified direction, performing raycasting to detect collisions.
 func move(direction : Vector2) -> void: 
@@ -74,6 +90,18 @@ func move(direction : Vector2) -> void:
 		$SFX.play()
 		check_enemy_proximity()
 		player_moved.emit()
+
+# Shoot
+func shoot_bullet(direction: Vector2) -> void:
+	if num_bullets > 0:
+		print("num_bullets: ", num_bullets)
+		var bullet_temp: Node = bullet_pool.get_bullet()
+		bullet_temp.velocity = direction * 300
+		bullet_temp.global_position = get_node("SpawnPoint").global_position
+		bullet_temp.show()
+		num_bullets -= 1
+	else:
+		has_gun = false
 
 # Attack
 func try_attack(direction : Vector2) -> void:

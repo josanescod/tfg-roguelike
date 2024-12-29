@@ -150,6 +150,7 @@ func test_generate_rooms() -> void:
 	preview += "Execution time: " + str(algorithm_execution_time) + " ms\n"
 	
 	print(preview)
+	print("INITIAL TIME: " + str(Global.best_time))
 
 func instantiate_rooms() -> void:
 	if rooms_instantiated:

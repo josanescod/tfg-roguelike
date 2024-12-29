@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc6nhinxldkhw"]
+
+[ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_mp51b"]
+[ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="1_yajlg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mg7kd"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f0tq8"]
+radius = 5.52268
+
+[node name="Bullet" type="CharacterBody2D" groups=["Bullet"]]
+scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_mp51b")
+
+[node name="PlayerBullet" type="Sprite2D" parent="."]
+modulate = Color(42.857, 1, 58.571, 0.957)
+texture = ExtResource("1_yajlg")
+region_enabled = true
+region_rect = Rect2(435.302, 339.028, 9.46335, 10.1643)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mg7kd")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_f0tq8")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://csbootqbcm3nt"]
+[gd_scene load_steps=13 format=3 uid="uid://csbootqbcm3nt"]
 
 [ext_resource type="Script" path="res://Scripts/level_builder.gd" id="1_hm1qq"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_c420u"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_f4rc0"]
+[ext_resource type="Script" path="res://Scripts/bullet_manager.gd" id="3_u44n6"]
 [ext_resource type="AudioStream" uid="uid://hyeh3kum4ydf" path="res://Assets/Sounds/walk.ogg" id="5_i256q"]
 [ext_resource type="Script" path="res://Scripts/ui.gd" id="5_q4ne1"]
 [ext_resource type="Script" path="res://Scripts/enemy_manager.gd" id="5_qtfhy"]
@@ -80,7 +81,7 @@ position = Vector2(0.5, 3.5)
 shape = SubResource("RectangleShape2D_b0ylf")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.5, 0.5)
+zoom = Vector2(0.3, 0.3)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Player"]
 libraries = {
@@ -90,6 +91,12 @@ libraries = {
 [node name="SFX" type="AudioStreamPlayer2D" parent="Player"]
 stream = ExtResource("5_i256q")
 volume_db = -35.0
+
+[node name="BulletManager" type="Node" parent="Player"]
+script = ExtResource("3_u44n6")
+
+[node name="SpawnPoint" type="Marker2D" parent="Player"]
+position = Vector2(0, 23)
 
 [node name="UI" type="CanvasLayer" parent="." groups=["UI"]]
 script = ExtResource("5_q4ne1")

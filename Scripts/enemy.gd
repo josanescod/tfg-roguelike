@@ -8,6 +8,9 @@ var damage : int = 1
 
 var attack_chance : float = 0.5
 
+# drop gun
+@export var gun_scene: PackedScene = preload("res://Nodes/gun.tscn")
+var drop_chance : float = 0.5
 
 func move() -> void:
 	if randf() < 0.5:
@@ -41,20 +44,35 @@ func get_random_direction() -> Vector2:
 	
 	return Vector2.ZERO
 
-func take_damage(damage_taken : int) -> void:
+func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
 	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
 	$SFX.play()
 	health -= damage_taken
 	$AnimationPlayer.play("Hit")
 	print('Enemy health: ', health)
 	if health <= 0:
+		# % drop weapon
+		if randf() < drop_chance:
+			drop_gun()
 		# Inform the player to remove this enemy from the list
 		player.remove_enemy(self)
 		Global.enemies_defeated += 1
 		queue_free()
 	
-	if randf() > attack_chance:
+	if allow_counterattack and randf() > attack_chance:
 		print("counterattack damage!")
 		player.take_damage(damage)
 		print("health: ", Global.health)
 		
+func drop_gun() -> void:
+	if gun_scene:
+		var gun_instance = gun_scene.instantiate()
+		if gun_instance:
+			gun_instance.global_position = global_position
+			print("Enemy died at: ", global_position)
+			print("Dropping gun at: ", gun_instance.global_position)
+			get_node("/root/World").call_deferred("add_child", gun_instance)
+		else:
+			print("Failed to instantiate gun_scene!")
+	else:
+		print("gun_scene is null!")
