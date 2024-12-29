@@ -95,11 +95,11 @@ func take_damage(damage_taken : int) -> void:
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
 		Sfx.get_child(4).play()
-		print("Player is dead")
 		call_deferred("reload_scene")
 
 func reload_scene() -> void:
 	print("You died!")
+	print(Global.best_time)
 	Sfx.get_child(5).stop()
 	get_tree().change_scene_to_file("res://Scenes/death_menu.tscn")
 

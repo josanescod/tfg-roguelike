@@ -11,6 +11,7 @@ BTN_MENU,MENU,MENU,MENU
 INFO_LEVEL,LEVEL,NIVEL,NIVELL
 MSG_DIED,You almost did it!,¡Casi lo logras!,Per poc ho aconsegueixes!
 MSG_WON,Great job!,¡Buen trabajo!,Bona feina!
-STAT_LEVEL,Level reached,Nivel alcanzado,Nivell assolit
-STAT_ENEMIES,Enemies defeated,Enemigos derrotados,Enemics derrotats
 STAT_COINS,Coins collected,Monedas recolectadas,Monedes aconseguides
+STAT_ENEMIES,Enemies defeated,Enemigos derrotados,Enemics derrotats
+STAT_LEVEL,Level reached,Nivel alcanzado,Nivell assolit
+STAT_TIME,Level best time,Mejor tiempo de nivel,Millor temps de nivell

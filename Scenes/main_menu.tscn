@@ -1232,5 +1232,5 @@ text = "BTN_BACK"
 [connection signal="pressed" from="Start/Buttons/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="Start/Buttons/Language" to="." method="_on_language_pressed"]
 [connection signal="pressed" from="Start/Buttons/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="Options/Buttons/Algo" to="." method="_on_algo_1_pressed"]
+[connection signal="pressed" from="Options/Buttons/Algo" to="." method="_on_algo_pressed"]
 [connection signal="pressed" from="Options/Buttons/Back" to="." method="_on_back_pressed"]

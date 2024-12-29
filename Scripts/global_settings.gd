@@ -9,3 +9,4 @@ var game_paused : bool = false
 var max_level : int = 3
 #var seed: int = 92833
 var language : String = "en"
+var best_time : float = INF # best time

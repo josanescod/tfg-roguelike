@@ -75,6 +75,8 @@ func on_timer_stoped() -> void:
 	$"TimeBar/Timer".stop()
 	#print("Total time: ", $"TimeBar/Time".text)
 
+
+
 # handle MiniMap
 func generate_mini_map() -> void:
 	$MiniMap/GridContainer.columns = LevelBuilder.ship_width
