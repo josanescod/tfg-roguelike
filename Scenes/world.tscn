@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://csbootqbcm3nt"]
+[gd_scene load_steps=14 format=3 uid="uid://csbootqbcm3nt"]
 
 [ext_resource type="Script" path="res://Scripts/level_builder.gd" id="1_hm1qq"]
+[ext_resource type="Script" path="res://Scripts/algorithm_manager.gd" id="1_rswdd"]
 [ext_resource type="Script" path="res://Scripts/player.gd" id="2_c420u"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_f4rc0"]
 [ext_resource type="Script" path="res://Scripts/bullet_manager.gd" id="3_u44n6"]
@@ -50,6 +51,9 @@ _data = {
 }
 
 [node name="World" type="Node2D"]
+
+[node name="AlgorithmManager" type="Node" parent="."]
+script = ExtResource("1_rswdd")
 
 [node name="LevelBuilder" type="Node" parent="."]
 script = ExtResource("1_hm1qq")
