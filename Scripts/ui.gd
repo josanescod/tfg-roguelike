@@ -27,8 +27,7 @@ func _process(_delta):
 	else:
 		$StatBar/KeySprite.modulate = "ffffff20"
 		
-
-	# handle hearts
+# handle hearts
 	match Global.health:
 		6:
 			$"HealthBar/Heart1".frame = 2
@@ -58,6 +57,30 @@ func _process(_delta):
 			$"HealthBar/Heart1".frame = 0
 			$"HealthBar/Heart2".frame = 0
 			$"HealthBar/Heart3".frame = 0
+
+# handle num_bullets
+	match player.num_bullets:
+		3:
+			$Bullets/Bullet1.visible = true
+			$Bullets/Bullet2.visible = true
+			$Bullets/Bullet3.visible = true
+		2:
+			$Bullets/Bullet1.visible = true
+			$Bullets/Bullet2.visible = true
+			$Bullets/Bullet3.visible = false
+		1:
+			$Bullets/Bullet1.visible = true
+			$Bullets/Bullet2.visible = false
+			$Bullets/Bullet3.visible = false
+		0:
+			$Bullets/Bullet1.visible = false
+			$Bullets/Bullet2.visible = false
+			$Bullets/Bullet3.visible = false
+
+	if player.has_gun:
+		$Bullets.visible = true
+	else:
+		$Bullets.visible = false
 
 	$MiniMap/Label.text = tr("INFO_LEVEL") + " " + str(Global.level) 
 	update_minimap()

@@ -100,8 +100,8 @@ func shoot_bullet(direction: Vector2) -> void:
 		bullet_temp.global_position = get_node("SpawnPoint").global_position
 		bullet_temp.show()
 		num_bullets -= 1
-	else:
-		has_gun = false
+		if num_bullets == 0:
+			has_gun = false
 
 # Attack
 func try_attack(direction : Vector2) -> void:

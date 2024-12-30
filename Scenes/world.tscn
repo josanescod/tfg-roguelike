@@ -177,6 +177,42 @@ texture = ExtResource("2_f4rc0")
 region_enabled = true
 region_rect = Rect2(528, 176, 16, 16)
 
+[node name="Bullets" type="Panel" parent="UI"]
+visible = false
+self_modulate = Color(1, 1, 1, 0.278431)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -206.0
+offset_top = 110.0
+offset_right = -53.0
+offset_bottom = 158.0
+grow_horizontal = 0
+
+[node name="Bullet1" type="Sprite2D" parent="UI/Bullets"]
+modulate = Color(48.571, 1, 58.571, 0.957)
+position = Vector2(26, 24)
+scale = Vector2(4.22221, 4.1875)
+texture = ExtResource("2_f4rc0")
+region_enabled = true
+region_rect = Rect2(435.44, 339.47, 9.3363, 8.96777)
+
+[node name="Bullet2" type="Sprite2D" parent="UI/Bullets"]
+modulate = Color(48.571, 1, 58.571, 0.957)
+position = Vector2(77, 24)
+scale = Vector2(4.22221, 4.1875)
+texture = ExtResource("2_f4rc0")
+region_enabled = true
+region_rect = Rect2(435.44, 339.47, 9.3363, 8.96777)
+
+[node name="Bullet3" type="Sprite2D" parent="UI/Bullets"]
+modulate = Color(48.571, 1, 58.571, 0.957)
+position = Vector2(128, 24)
+scale = Vector2(4.22221, 4.1875)
+texture = ExtResource("2_f4rc0")
+region_enabled = true
+region_rect = Rect2(435.44, 339.47, 9.3363, 8.96777)
+
 [node name="TimeBar" type="Panel" parent="UI"]
 self_modulate = Color(1, 1, 1, 0.278431)
 anchors_preset = 5

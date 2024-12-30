@@ -10,7 +10,7 @@ var attack_chance : float = 0.5
 
 # drop gun
 @export var gun_scene: PackedScene = preload("res://Nodes/gun.tscn")
-var drop_chance : float = 0.5
+var drop_chance : float = 1
 
 func move() -> void:
 	if randf() < 0.5:
