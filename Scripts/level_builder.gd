@@ -34,7 +34,7 @@ func _ready():
 
 func generate_map() -> void:
 	algorithm_manager.setup(ship_width, ship_heigth, rooms_to_build)
-	algorithm_manager.set_algorithm("random_walk")  # o "bsp" o "cellular"
+	algorithm_manager.set_algorithm(Global.algorithm)  # "random_walk" o "bsp" o "cellular"
 	var result = algorithm_manager.generate(Vector2(init_x, init_y))
 	process_generation_result(result)
 
@@ -150,5 +150,6 @@ func print_test_generation() -> void:
 	preview += "Total rooms: " + str(rooms_to_build) + "\n"
 	preview += "Density map: " + str("%0.2f" % density) + " %\n"
 	preview += "Execution time: " + str(algorithm_execution_time) + " ms\n"
+	preview += "Procedural algorithm: " + Global.algorithm + "\n"
 	print(preview)
 	print("best initial time: ", Global.best_time)

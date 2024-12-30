@@ -1220,7 +1220,14 @@ custom_minimum_size = Vector2(200, 50)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_sajkt")
 theme_override_font_sizes/font_size = 50
-text = "BTN_ALGO"
+text = "RANDOM WALK"
+
+[node name="Continue" type="Button" parent="Options/Buttons"]
+custom_minimum_size = Vector2(200, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_sajkt")
+theme_override_font_sizes/font_size = 50
+text = "BTN_CONTINUE"
 
 [node name="Back" type="Button" parent="Options/Buttons"]
 custom_minimum_size = Vector2(200, 50)
@@ -1233,4 +1240,5 @@ text = "BTN_BACK"
 [connection signal="pressed" from="Start/Buttons/Language" to="." method="_on_language_pressed"]
 [connection signal="pressed" from="Start/Buttons/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Options/Buttons/Algo" to="." method="_on_algo_pressed"]
+[connection signal="pressed" from="Options/Buttons/Continue" to="." method="_on_continue_pressed"]
 [connection signal="pressed" from="Options/Buttons/Back" to="." method="_on_back_pressed"]
