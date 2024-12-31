@@ -1,13 +1,17 @@
 extends CharacterBody2D
 
 @onready var bullet_pool = get_node("BulletManager")
+@onready var final_boss_scene : PackedScene = load("res://Nodes/final_boss.tscn")
+
 # signal to emit
 signal player_moved
+var exit_door_room_position: Vector2
 
 # initial condition Player has not the key
-var has_key : bool = false
-var has_gun : bool = false
-var num_bullets : int = 0
+var has_key: bool = false
+var has_gun: bool = false
+var boss_spawned: bool = false
+var num_bullets: int = 0
 
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
@@ -24,6 +28,10 @@ func _physics_process(_delta):
 	if Global.game_paused:
 		return
 	player_input()
+	if Global.level == Global.max_level-1 and has_key and not boss_spawned:
+		print("It's the last level! Maybe you will encounter a very dangerous monster!")
+		spawn_final_boss(exit_door_room_position)
+		boss_spawned = true
 
 # Function to manage player input and determine the direction of motion
 func player_input() -> void:
@@ -152,7 +160,7 @@ func check_enemy_proximity() -> void:
 				print("proximity attack!")
 				print("health: ", Global.health)
 
-# Function to remove the enemy from the list
+# Function to remove the common enemies from the list
 func remove_enemy(enemy):
 	enemies.erase(enemy)
 
@@ -177,3 +185,9 @@ func show_arrow_direction(move_direction: Vector2) -> void:
 		$ArrowDown.visible = false
 		$ArrowRight.visible = false
 		$ArrowUp.visible = true
+
+func spawn_final_boss(position_door: Vector2) -> void:
+	var final_boss = final_boss_scene.instantiate()
+	var spawn_offset = Vector2(randi_range(-1, 1) * 48, randi_range(-1, 1) * 48)
+	final_boss.global_position = position_door + spawn_offset
+	$"..".call_deferred("add_child", final_boss)

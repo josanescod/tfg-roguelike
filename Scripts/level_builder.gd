@@ -3,11 +3,12 @@ extends Node
 @onready var room_scene : PackedScene = load("res://Nodes/room.tscn")
 @onready var door_scene : PackedScene = load("res://Nodes/door.tscn")
 @onready var key_scene : PackedScene = load("res://Nodes/key.tscn")
+
 @onready var algorithm_manager = $"../AlgorithmManager"
 
 var ship_width : int = 7
 var ship_heigth : int = 7
-var rooms_to_build : int = randi_range(5,5) # 6,12
+var rooms_to_build : int = randi_range(3,5 ) # 6,12
 var room_counter: int = 0
 var initial_room_position : Vector2
 var rooms_instantiated : bool = false
@@ -111,7 +112,7 @@ func instantiate_key_and_exit_door() -> void:
 				if distance > max_distance:
 					key_room = available_rooms[i]
 					exit_door_room = available_rooms[j]
-		print("key_room:", key_room, " - door_room:", exit_door_room)
+		print("key_room:", key_room, " - exit_door:", exit_door_room)
 		# key
 		if key_room:
 			var key = key_scene.instantiate()
@@ -125,6 +126,7 @@ func instantiate_key_and_exit_door() -> void:
 			var exit_door_x = randi_range(100,400)
 			var exit_door_y = randi_range(100,400)
 			exit_door.global_position = exit_door_room * 816 + Vector2(exit_door_x, exit_door_y)
+			$"../Player".exit_door_room_position = exit_door.global_position
 			$"..".call_deferred("add_child", exit_door)
 
 func print_test_generation() -> void:
