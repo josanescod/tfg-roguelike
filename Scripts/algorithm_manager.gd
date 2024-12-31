@@ -44,9 +44,163 @@ class RandomWalkGenerator:
 				3: current_y = clamp(current_y - 1, 0, map_data.height - 1)
 
 
-class BSPGenerator:
-	static func generate(_map_data: MapData, _start_pos: Vector2) -> void:
-		print("Executing bps")
+class AgentBasedGenerator:
+	const DIRECTIONS = [Vector2(1, 0), Vector2(-1, 0), Vector2(0, 1), Vector2(0, -1)]
+	static func generate(map_data: MapData, start_pos: Vector2) -> void:
+		print("Executing agent_based")
+		var rooms_created = 0
+		var current_pos = Vector2(start_pos)
+		# Place initial room
+		map_data.ship_map[int(current_pos.x)][int(current_pos.y)] = true
+		map_data.initial_room_position = current_pos
+		rooms_created += 1
+		while rooms_created < map_data.rooms_count:
+			if try_place_adjacent_room(map_data, current_pos):
+				rooms_created += 1
+				current_pos = find_last_placed_room(map_data)
+			else:
+				var new_pos = find_new_position(map_data)
+				if new_pos == Vector2(-1, -1):
+					break
+				current_pos = new_pos
+		ensure_connectivity(map_data)
+
+	static func try_place_adjacent_room(map_data: MapData, pos: Vector2) -> bool:
+		var directions = DIRECTIONS.duplicate()
+		directions.shuffle()
+		for dir in directions:
+			var new_pos = Vector2(
+				int(pos.x + dir.x),
+				int(pos.y + dir.y)
+			)
+
+			if is_valid_room_position(map_data, new_pos):
+				map_data.ship_map[new_pos.x][new_pos.y] = true
+				return true
+
+		return false
+
+	static func is_valid_room_position(map_data: MapData, pos: Vector2) -> bool:
+		if not (pos.x >= 0 and pos.x < map_data.width and pos.y >= 0 and pos.y < map_data.height):
+			return false
+
+		if map_data.ship_map[pos.x][pos.y]:
+			return false
+
+		var adjacent_rooms = 0
+		var diagonal_rooms = 0
+
+		for x in range(-1, 2):
+			for y in range(-1, 2):
+				if x == 0 and y == 0:
+					continue
+
+				var check_pos = Vector2(pos.x + x, pos.y + y)
+				if is_valid_position(map_data, check_pos) and map_data.ship_map[check_pos.x][check_pos.y]:
+					if abs(x) == 1 and abs(y) == 1:
+						diagonal_rooms += 1
+					else:
+						adjacent_rooms += 1
+
+		return adjacent_rooms > 0 and adjacent_rooms < 4 and diagonal_rooms < 2
+
+	static func is_valid_position(map_data: MapData, pos: Vector2) -> bool:
+		return (pos.x >= 0 and pos.x < map_data.width and
+				pos.y >= 0 and pos.y < map_data.height)
+
+	static func find_new_position(map_data: MapData) -> Vector2:
+		var room_positions = []
+		for x in range(map_data.width):
+			for y in range(map_data.height):
+				if map_data.ship_map[x][y]:
+					room_positions.append(Vector2(x, y))
+		room_positions.shuffle()
+		for pos in room_positions:
+			for dir in DIRECTIONS:
+				var new_pos = Vector2(int(pos.x + dir.x), int(pos.y + dir.y))
+				if is_valid_room_position(map_data, new_pos):
+					return pos
+		return Vector2(-1, -1)
+
+	static func find_last_placed_room(map_data: MapData) -> Vector2:
+		for x in range(map_data.width - 1, -1, -1):
+			for y in range(map_data.height - 1, -1, -1):
+				if map_data.ship_map[x][y]:
+					return Vector2(x, y)
+		return Vector2(0, 0)
+
+	static func ensure_connectivity(map_data: MapData) -> void:
+		var regions = find_regions(map_data)
+		if regions.size() <= 1:
+			return
+		var main_region = regions[0]
+		for i in range(1, regions.size()):
+			connect_regions(map_data, main_region, regions[i])
+
+	static func find_regions(map_data: MapData) -> Array:
+		var regions = []
+		var visited = []
+		for x in range(map_data.width):
+			visited.append([])
+			for y in range(map_data.height):
+				visited[x].append(false)
+		for x in range(map_data.width):
+			for y in range(map_data.height):
+				if map_data.ship_map[x][y] and not visited[x][y]:
+					var new_region = flood_fill(map_data, visited, x, y)
+					regions.append(new_region)
+		return regions
+
+	static func flood_fill(map_data: MapData, visited: Array, start_x: int, start_y: int) -> Array:
+		var region = []
+		var stack = [[start_x, start_y]]
+
+		while not stack.is_empty():
+			var current = stack.pop_back()
+			var x = current[0]
+			var y = current[1]
+
+			if visited[x][y]:
+				continue
+
+			visited[x][y] = true
+			region.append([x, y])
+			for dir in DIRECTIONS:
+				var nx = x + int(dir.x)
+				var ny = y + int(dir.y)
+				if is_valid_position(map_data, Vector2(nx, ny)):
+					if map_data.ship_map[nx][ny] and not visited[nx][ny]:
+						stack.append([nx, ny])
+		return region
+
+	static func connect_regions(map_data: MapData, region1: Array, region2: Array) -> void:
+		var best_distance = INF
+		var best_tile1 = null
+		var best_tile2 = null
+		for tile1 in region1:
+			for tile2 in region2:
+				var dist = abs(tile1[0] - tile2[0]) + abs(tile1[1] - tile2[1])
+				if dist < best_distance:
+					best_distance = dist
+					best_tile1 = tile1
+					best_tile2 = tile2
+		create_connection(map_data, best_tile1, best_tile2)
+
+	static func create_connection(map_data: MapData, start: Array, end: Array) -> void:
+		var current_x = start[0]
+		var current_y = start[1]
+
+		while current_x != end[0] or current_y != end[1]:
+			map_data.ship_map[current_x][current_y] = true
+
+			if current_x < end[0]:
+				current_x += 1
+			elif current_x > end[0]:
+				current_x -= 1
+			elif current_y < end[1]:
+				current_y += 1
+			else:
+				current_y -= 1
 
 class CellularAutomataGenerator:
 	const BIRTH_LIMIT = 4
@@ -251,8 +405,8 @@ func execute_generation(start_position: Vector2) -> void:
 	match current_algorithm:
 		"random_walk":
 			RandomWalkGenerator.generate(map_data, start_position)
-		"bsp":
-			BSPGenerator.generate(map_data, start_position)
+		"agent_based":
+			AgentBasedGenerator.generate(map_data, start_position)
 		"cellular":
 			CellularAutomataGenerator.generate(map_data, start_position)
 

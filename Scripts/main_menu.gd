@@ -54,9 +54,9 @@ func _on_algo_pressed() -> void:
 			$Options/Buttons/Algo.text = "Cellular"
 			Global.algorithm = "cellular"
 		"cellular":
-			$Options/Buttons/Algo.text = "BSP"
-			Global.algorithm = "BSP"
-		"BSP":
+			$Options/Buttons/Algo.text = "Agent Based"
+			Global.algorithm = "agent_based"
+		"agent_based":
 			$Options/Buttons/Algo.text = "Random Walk"
 			Global.algorithm = "random_walk"
 	update_continue_button_state()

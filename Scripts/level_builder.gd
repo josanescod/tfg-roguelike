@@ -7,7 +7,7 @@ extends Node
 
 var ship_width : int = 7
 var ship_heigth : int = 7
-var rooms_to_build : int = randi_range(3,5) # 6,12
+var rooms_to_build : int = randi_range(5,5) # 6,12
 var room_counter: int = 0
 var initial_room_position : Vector2
 var rooms_instantiated : bool = false
@@ -34,7 +34,7 @@ func _ready():
 
 func generate_map() -> void:
 	algorithm_manager.setup(ship_width, ship_heigth, rooms_to_build)
-	algorithm_manager.set_algorithm(Global.algorithm)  # "random_walk" o "bsp" o "cellular"
+	algorithm_manager.set_algorithm(Global.algorithm)  # "random_walk" o "agent_based" o "cellular"
 	var result = algorithm_manager.generate(Vector2(init_x, init_y))
 	process_generation_result(result)
 
