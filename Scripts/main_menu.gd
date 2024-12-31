@@ -28,7 +28,10 @@ func _on_play_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	if OS.get_name() == "Web":
+		JavaScriptBridge.eval("window.location.href='http://localhost:8000/tfg-rglike.html'")
+	else:
+		get_tree().quit()
 
 func _on_language_pressed() -> void:
 	if Global.language=="en":

@@ -12,6 +12,19 @@ var attack_chance : float = 0.5
 @export var gun_scene: PackedScene = preload("res://Nodes/gun.tscn")
 var drop_chance : float = 1
 
+func _ready() -> void:
+	update_health_label()
+
+func update_health_label() -> void:
+	match health:
+		3:
+			$LabelHealth.text = "3"
+		2:
+			$LabelHealth.text = "2"
+		1:
+			$LabelHealth.text = "1"
+
+
 func move() -> void:
 	if randf() < 0.5:
 		return
@@ -48,6 +61,7 @@ func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
 	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
 	$SFX.play()
 	health -= damage_taken
+	update_health_label()
 	$AnimationPlayer.play("Hit")
 	print('Enemy health: ', health)
 	if health <= 0:
