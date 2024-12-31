@@ -30,15 +30,19 @@ func player_input() -> void:
 	var move_direction = Vector2.ZERO  	
 	if Input.is_action_just_pressed("move_left"):
 		move_direction = Vector2.LEFT
+		show_arrow_direction(move_direction)
 		move(move_direction)
 	elif Input.is_action_just_pressed("move_up"):
 		move_direction = Vector2.UP
+		show_arrow_direction(move_direction)
 		move(move_direction)
 	elif Input.is_action_just_pressed("move_right"):
 		move_direction = Vector2.RIGHT
+		show_arrow_direction(move_direction)
 		move(move_direction)
 	elif Input.is_action_just_pressed("move_down"):
 		move_direction = Vector2.DOWN
+		show_arrow_direction(move_direction)
 		move(move_direction)
 	
 	if move_direction != Vector2.ZERO:
@@ -151,3 +155,25 @@ func check_enemy_proximity() -> void:
 # Function to remove the enemy from the list
 func remove_enemy(enemy):
 	enemies.erase(enemy)
+
+func show_arrow_direction(move_direction: Vector2) -> void:
+	if move_direction == Vector2.LEFT:
+		$ArrowLeft.visible = true
+		$ArrowDown.visible = false
+		$ArrowRight.visible = false
+		$ArrowUp.visible = false
+	elif move_direction == Vector2.DOWN:
+		$ArrowLeft.visible = false
+		$ArrowDown.visible = true
+		$ArrowRight.visible = false
+		$ArrowUp.visible = false
+	elif move_direction == Vector2.RIGHT:
+		$ArrowLeft.visible = false
+		$ArrowDown.visible = false
+		$ArrowRight.visible = true
+		$ArrowUp.visible = false
+	elif move_direction == Vector2.UP:
+		$ArrowLeft.visible = false
+		$ArrowDown.visible = false
+		$ArrowRight.visible = false
+		$ArrowUp.visible = true
