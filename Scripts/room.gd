@@ -5,16 +5,22 @@ var inside_width : int = 9
 var inside_height : int = 9
 
 @onready var LevelBuilder : Node
+@onready var Pattern: TextureRect = $Pattern
 
 @export var enemy_item : PackedScene
 @export var coin_item : PackedScene
 @export var heart_item: PackedScene
+
 
 var used_position : Array
 
 func _ready():
 	if LevelBuilder:
 		populate_room_with_items()
+
+func _process(_delta: float) -> void:
+	handle_background_pause()
+
 
 func north():
 	$NorthDoor.visible = true
@@ -74,3 +80,11 @@ func spawn_item(item_scene : PackedScene, min_ins : int = 0, max_ins : int = 0) 
 	# if item is an enemy, add it to the enemies array
 	if item_scene == enemy_item:
 		get_tree().get_first_node_in_group("Enemy_Manager").check_enemies()
+
+func handle_background_pause() -> void:
+	if Global.game_paused:
+		var shader_material = Pattern.material
+		shader_material.set("shader_parameter/speed", 0.0)
+	else:
+		var shader_material = Pattern.material
+		shader_material.set("shader_parameter/speed", 0.01)

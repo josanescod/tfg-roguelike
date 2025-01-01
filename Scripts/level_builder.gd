@@ -55,13 +55,13 @@ func _input(event):
 		print("pressing ESC")
 		if Global.game_paused == false:
 			print("Showing Pause Menu")
-			Sfx.get_child(5).stop()
+			Sfx.get_child(1).stop()
 			$"../UI/PauseMenu".visible = true
 			$"../UI/TimeBar/Timer".paused = true
 			Global.game_paused = true
 		else:
 			print("Hiding Pause Menu")
-			Sfx.get_child(5).play()
+			Sfx.get_child(1).play()
 			$"../UI/PauseMenu".visible = false
 			$"../UI/TimeBar/Timer".paused = false
 			Global.game_paused = false

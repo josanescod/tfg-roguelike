@@ -29,6 +29,7 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 - hit.ogg -> retro_die_03.ogg
 - heart.ogg -> power_up_01.ogg
 - key.ogg -> power_up_04.ogg
+- laser_shot.ogg ->  synth_laser_08.ogg
 - next_room.ogg -> synth_misc_05.ogg
 - walk.ogg -> synth_misc_15.ogg
 

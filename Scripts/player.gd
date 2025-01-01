@@ -20,7 +20,7 @@ var enemies = []
 
 func _ready() -> void:
 	# background music
-	Sfx.get_child(5).play()
+	Sfx.get_child(1).play()
 
 
 # Main function to be executed in each physics frame
@@ -107,6 +107,7 @@ func move(direction : Vector2) -> void:
 func shoot_bullet(direction: Vector2) -> void:
 	if num_bullets > 0:
 		print("num_bullets: ", num_bullets)
+		Sfx.get_child(6).play() # Shot sound
 		var bullet_temp: Node = bullet_pool.get_bullet()
 		bullet_temp.velocity = direction * 300
 		bullet_temp.global_position = get_node("SpawnPoint").global_position
@@ -134,13 +135,13 @@ func take_damage(damage_taken : int) -> void:
 	$SFX.play()
 	$AnimationPlayer.play("Hit")
 	if Global.health <= 0:
-		Sfx.get_child(4).play()
+		Sfx.get_child(2).play()
 		call_deferred("reload_scene")
 
 func reload_scene() -> void:
 	print("You died!")
 	print(Global.best_time)
-	Sfx.get_child(5).stop()
+	Sfx.get_child(1).stop()
 	get_tree().change_scene_to_file("res://Scenes/death_menu.tscn")
 
 func check_enemy_proximity() -> void:
@@ -189,13 +190,13 @@ func show_arrow_direction(move_direction: Vector2) -> void:
 func spawn_final_boss(position_door: Vector2) -> void:
 	var final_boss = final_boss_scene.instantiate()
 	var possible_positions = [
-		Vector2(2, 2),
-		Vector2(-2, 2),
-		Vector2(-2, -2),
-		Vector2(3, 0),
-		Vector2(-3, 0),
-		Vector2(0, 3),
-		Vector2(0, -3)
+		Vector2(1, 1),
+		Vector2(-1, 1),
+		Vector2(-1, -1),
+		Vector2(1, 0),
+		Vector2(-1, 0),
+		Vector2(0, 1),
+		Vector2(0, -1)
 	]
 	var chosen_position = possible_positions[randi() % possible_positions.size()]
 	var spawn_offset = chosen_position * 48

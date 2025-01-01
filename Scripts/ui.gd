@@ -127,7 +127,7 @@ func _on_continue_pressed() -> void:
 	$PauseMenu.visible = false
 	$TimeBar/Timer.paused = false
 	Global.game_paused = false
-	Sfx.get_child(5).play()
+	Sfx.get_child(1).play()
 
 func _on_exit_game_pressed() -> void:
 	Sfx.get_child(5).stop()

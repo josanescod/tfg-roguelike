@@ -141,7 +141,7 @@ region_rect = Rect2(369.727, 322.744, 12.662, 11.2772)
 script = ExtResource("5_q4ne1")
 
 [node name="HealthBar" type="Panel" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -179,7 +179,7 @@ region_enabled = true
 region_rect = Rect2(640, 160, 48, 16)
 
 [node name="StatBar" type="Panel" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -218,7 +218,7 @@ region_rect = Rect2(528, 176, 16, 16)
 
 [node name="Bullets" type="Panel" parent="UI"]
 visible = false
-self_modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -253,7 +253,7 @@ region_enabled = true
 region_rect = Rect2(435.44, 339.47, 9.3363, 8.96777)
 
 [node name="TimeBar" type="Panel" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -282,11 +282,26 @@ vertical_alignment = 1
 [node name="Timer" type="Timer" parent="UI/TimeBar"]
 
 [node name="MiniMap" type="Panel" parent="UI"]
-self_modulate = Color(1, 1, 1, 0.278431)
+self_modulate = Color(1, 1, 1, 0)
 offset_left = 52.0
 offset_top = 8.0
 offset_right = 252.0
 offset_bottom = 208.0
+
+[node name="Label" type="Label" parent="UI/MiniMap"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("6_5l5eh")
+theme_override_font_sizes/font_size = 50
+text = "LEVEL 1"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="UI/MiniMap"]
 layout_mode = 1
@@ -302,20 +317,6 @@ grow_vertical = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 6
-
-[node name="Label" type="Label" parent="UI/MiniMap"]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -20.0
-offset_right = 20.0
-offset_bottom = 23.0
-grow_horizontal = 2
-theme_override_fonts/font = ExtResource("6_5l5eh")
-theme_override_font_sizes/font_size = 50
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="PauseMenu" type="Panel" parent="UI"]
 visible = false
