@@ -20,25 +20,33 @@ func north():
 	$NorthDoor.visible = true
 	$NorthFloor.visible = true
 	$NorthWall.queue_free()
-
+	$MetallicFloor.visible = true
+	$MetallicNorth.visible = true
+	$TextureNorth.visible = true
 func south():
 	$SouthDoor.visible = true
 	$SouthFloor.visible = true
 	$SouthWall.queue_free()
-
+	$MetallicFloor.visible = true
+	$MetallicSouth.visible = true
+	$TextureSouth.visible = true
 func east():
 	$EastDoor.visible = true
 	$EastFloor.visible = true
 	$EastWall.queue_free()
-	
+	$MetallicFloor.visible = true
+	$MetallicEast.visible = true
+	$TextureEast.visible = true
 func west():
 	$WestDoor.visible = true
 	$WestFloor.visible = true
 	$WestWall.queue_free()
-	
+	$MetallicFloor.visible = true
+	$MetallicWest.visible = true
+	$TextureWest.visible = true
 func show_instructions_on_the_floor():
-	$Instructions_Floor.visible = true
-	#$ShipFloor.modulate = "ffffff05"
+	$InstructionsFloor.visible = true
+	$StarshipFloor.visible = true
 
 # populate the interior of the rooms with enemies, coins and hearts
 func populate_room_with_items() -> void:

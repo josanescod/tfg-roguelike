@@ -47,3 +47,14 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 #### List of Original File Names Modified
 
 - long_away_home.ogg -> Long Away Home.wav
+
+### Background Image
+
+- Space by Kutejnikov (https://opengameart.org/content/space-9)
+- License: Creative Commons Zero, CC0
+
+#### List of Original File Names Modified
+
+- space-background.png -> space.png
+- pattern.png -> space.png
+- background-grey.png -> space.png

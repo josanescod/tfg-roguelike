@@ -116,15 +116,15 @@ func instantiate_key_and_exit_door() -> void:
 		# key
 		if key_room:
 			var key = key_scene.instantiate()
-			var key_x = randi_range(100,400)
-			var key_y = randi_range(100,400)
+			var key_x = 48 * randi_range(2, 8) - 24
+			var key_y = 48 * randi_range(2, 8) - 24
 			key.global_position = key_room * 816 + Vector2(key_x, key_y)
 			$"..".call_deferred("add_child", key)
 		# exit_door
 		if exit_door_room:
 			var exit_door = door_scene.instantiate()
-			var exit_door_x = randi_range(100,400)
-			var exit_door_y = randi_range(100,400)
+			var exit_door_x = 48 * randi_range(2, 8) - 24
+			var exit_door_y = 48 * randi_range(2, 8) - 24
 			exit_door.global_position = exit_door_room * 816 + Vector2(exit_door_x, exit_door_y)
 			$"../Player".exit_door_room_position = exit_door.global_position
 			$"..".call_deferred("add_child", exit_door)

@@ -188,6 +188,16 @@ func show_arrow_direction(move_direction: Vector2) -> void:
 
 func spawn_final_boss(position_door: Vector2) -> void:
 	var final_boss = final_boss_scene.instantiate()
-	var spawn_offset = Vector2(randi_range(-1, 1) * 48, randi_range(-1, 1) * 48)
+	var possible_positions = [
+		Vector2(2, 2),
+		Vector2(-2, 2),
+		Vector2(-2, -2),
+		Vector2(3, 0),
+		Vector2(-3, 0),
+		Vector2(0, 3),
+		Vector2(0, -3)
+	]
+	var chosen_position = possible_positions[randi() % possible_positions.size()]
+	var spawn_offset = chosen_position * 48
 	final_boss.global_position = position_door + spawn_offset
 	$"..".call_deferred("add_child", final_boss)
