@@ -18,22 +18,27 @@ func _ready():
 
 func north():
 	$NorthDoor.visible = true
+	$NorthFloor.visible = true
 	$NorthWall.queue_free()
-	
+
 func south():
 	$SouthDoor.visible = true
+	$SouthFloor.visible = true
 	$SouthWall.queue_free()
 
 func east():
 	$EastDoor.visible = true
+	$EastFloor.visible = true
 	$EastWall.queue_free()
 	
 func west():
 	$WestDoor.visible = true
+	$WestFloor.visible = true
 	$WestWall.queue_free()
 	
 func show_instructions_on_the_floor():
 	$Instructions_Floor.visible = true
+	#$ShipFloor.modulate = "ffffff05"
 
 # populate the interior of the rooms with enemies, coins and hearts
 func populate_room_with_items() -> void:
