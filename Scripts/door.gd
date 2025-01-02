@@ -6,6 +6,9 @@ func _on_body_entered(body):
 	if body.is_in_group("Player"):
 		if body.has_key:
 			if Global.level == Global.max_level - 1:
+				if not body.boss_defeated:
+					print("Boss still alive!")
+					return
 				Sfx.get_child(7).play()
 			else:
 				Sfx.get_child(3).play()

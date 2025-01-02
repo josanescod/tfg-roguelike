@@ -12,6 +12,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(damage, false)
 			get_parent().reset_bullet(self)
+
+	if body.is_in_group("Player") and self.visible:
+		if body.has_method("take_damage"):
+			body.take_damage(damage)
+			get_parent().reset_bullet(self)
 	
 	if body.is_in_group("Wall") and self.visible:
 		get_parent().reset_bullet(self)

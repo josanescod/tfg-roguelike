@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://k2djpqqnemv8"]
+[gd_scene load_steps=9 format=3 uid="uid://k2djpqqnemv8"]
 
 [ext_resource type="Script" path="res://Scripts/final_boss.gd" id="1_kq0m2"]
 [ext_resource type="Texture2D" uid="uid://dge2k5dkwh8s1" path="res://Assets/colored-transparent_packed.png" id="2_p5xy1"]
 [ext_resource type="FontFile" uid="uid://dho5idw3u4c35" path="res://Assets/Kenney Pixel.ttf" id="3_b4juv"]
+[ext_resource type="Script" path="res://Scripts/boss_bullet_manager.gd" id="4_d6uwq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jy1w2"]
 size = Vector2(20, 25)
@@ -61,7 +62,7 @@ offset_right = 20.0
 offset_bottom = -19.0
 theme_override_fonts/font = ExtResource("3_b4juv")
 theme_override_font_sizes/font_size = 25
-text = "6
+text = "
 "
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -76,3 +77,14 @@ libraries = {
 }
 
 [node name="SFX" type="AudioStreamPlayer" parent="."]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="BossBulletManager" type="Node2D" parent="."]
+script = ExtResource("4_d6uwq")
+
+[node name="SpawnPoint" type="Marker2D" parent="."]
+position = Vector2(0, 23)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

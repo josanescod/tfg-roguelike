@@ -11,6 +11,7 @@ var exit_door_room_position: Vector2
 var has_key: bool = false
 var has_gun: bool = false
 var boss_spawned: bool = false
+var boss_defeated: bool = false
 var num_bullets: int = 0
 
 # to save last movement up by default
@@ -59,7 +60,7 @@ func player_input() -> void:
 	
 	# space bar and last direction 
 	if Input.is_action_just_pressed("attack"):
-		get_node("SpawnPoint").position = last_direction*30
+		get_node("PlayerSpawnPoint").position = last_direction * 50
 		match last_direction:
 			Vector2.LEFT:
 				if has_gun:
@@ -110,7 +111,7 @@ func shoot_bullet(direction: Vector2) -> void:
 		Sfx.get_child(6).play() # Shot sound
 		var bullet_temp: Node = bullet_pool.get_bullet()
 		bullet_temp.velocity = direction * 300
-		bullet_temp.global_position = get_node("SpawnPoint").global_position
+		bullet_temp.global_position = get_node("PlayerSpawnPoint").global_position
 		bullet_temp.show()
 		num_bullets -= 1
 		if num_bullets == 0:
@@ -157,9 +158,10 @@ func check_enemy_proximity() -> void:
 		if intersection_result:
 			if intersection_result.collider.is_in_group("Enemy"):
 				print("Enemy detected in direction ", direction)
-				take_damage(1)
-				print("proximity attack!")
-				print("health: ", Global.health)
+				if randf() > 0.5:
+					take_damage(1)
+					print("proximity attack!")
+					print("health: ", Global.health)
 
 # Function to remove the common enemies from the list
 func remove_enemy(enemy):

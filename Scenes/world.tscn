@@ -99,7 +99,7 @@ volume_db = -35.0
 [node name="BulletManager" type="Node" parent="Player"]
 script = ExtResource("3_u44n6")
 
-[node name="SpawnPoint" type="Marker2D" parent="Player"]
+[node name="PlayerSpawnPoint" type="Marker2D" parent="Player"]
 position = Vector2(0, 23)
 
 [node name="ArrowLeft" type="Sprite2D" parent="Player"]

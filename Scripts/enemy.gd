@@ -77,7 +77,8 @@ func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
 		print("counterattack damage!")
 		player.take_damage(damage)
 		print("health: ", Global.health)
-		
+	#move()
+
 func drop_gun() -> void:
 	if gun_scene:
 		var gun_instance = gun_scene.instantiate()
