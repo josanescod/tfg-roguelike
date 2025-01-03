@@ -8,7 +8,7 @@ extends Node
 
 var ship_width : int = 7
 var ship_heigth : int = 7
-var rooms_to_build : int = randi_range(3,5 ) # 6,12
+var rooms_to_build : int = randi_range(3,4 ) # 6,12
 var room_counter: int = 0
 var initial_room_position : Vector2
 var rooms_instantiated : bool = false

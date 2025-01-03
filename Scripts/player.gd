@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var bullet_pool = get_node("BulletManager")
-@onready var final_boss_scene : PackedScene = load("res://Nodes/final_boss.tscn")
+@onready var final_boss_scene: PackedScene = load("res://Nodes/final_boss.tscn")
 
 # signal to emit
 signal player_moved
@@ -29,8 +29,8 @@ func _physics_process(_delta):
 	if Global.game_paused:
 		return
 	player_input()
-	if Global.level == Global.max_level-1 and has_key and not boss_spawned:
-		print("It's the last level! Maybe you will encounter a very dangerous monster!")
+	if has_key and not boss_spawned:
+		print("Maybe you will encounter a very dangerous monster!")
 		spawn_final_boss(exit_door_room_position)
 		boss_spawned = true
 
@@ -203,4 +203,5 @@ func spawn_final_boss(position_door: Vector2) -> void:
 	var chosen_position = possible_positions[randi() % possible_positions.size()]
 	var spawn_offset = chosen_position * 48
 	final_boss.global_position = position_door + spawn_offset
+	print("Patrol points set:", final_boss.patrol_points)  # Debug print
 	$"..".call_deferred("add_child", final_boss)

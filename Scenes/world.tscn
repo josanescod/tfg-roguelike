@@ -78,7 +78,7 @@ position = Vector2(0.500008, -0.387497)
 scale = Vector2(4.688, 3)
 texture = ExtResource("2_f4rc0")
 region_enabled = true
-region_rect = Rect2(481.431, 49.4708, 12.7452, 14.5292)
+region_rect = Rect2(482.368, 50.2348, 11.3167, 13.9283)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(1, 1)

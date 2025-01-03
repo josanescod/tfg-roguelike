@@ -14,8 +14,15 @@ var num_bullets: int = 3
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
 
+# to patrol corners
+var patrol_points: Array = []  # corners
+var current_patrol_index: int = 0
+
+
 func _ready() -> void:
 	update_health_label()
+
+
 
 func update_health_label() -> void:
 	match health:
@@ -34,11 +41,13 @@ func update_health_label() -> void:
 
 # Shoot
 func shoot_bullet(direction: Vector2) -> void:
-	get_node("SpawnPoint").position = last_direction*30
+	get_node("SpawnPoint").position = last_direction*50
 	if num_bullets > 0:
 		print("num_bullets: ", num_bullets)
 		Sfx.get_child(6).play() # Shot sound
 		var bullet_temp: Node = bullet_pool.get_bullet()
+		bullet_temp.is_player_bullet = false
+		bullet_temp.add_collision_exception_with(self)
 		bullet_temp.velocity = direction * 300
 		bullet_temp.global_position = get_node("SpawnPoint").global_position
 		bullet_temp.show()
@@ -79,36 +88,38 @@ func get_random_direction() -> Vector2:
 	return Vector2.ZERO
 
 func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
-	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
-	$SFX.play()
 	health -= damage_taken
 	update_health_label()
 	$AnimationPlayer.play("Hit")
-	print('Enemy health: ', health)
+	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
+	$SFX.play()
+
 	if health <= 0:
-		# Inform the player to remove this enemy from the list
-		#player.remove_enemy(self)
+		await $SFX.finished
 		player.boss_defeated = true
 		Global.enemies_defeated += 1
 		queue_free()
+		return
 	if allow_counterattack and randf() > attack_chance:
-		print("counterattack damage!")
 		player.take_damage(damage)
-		print("health: ", Global.health)
 	move()
+
+func ready_to_shoot() -> void:
+	var distance_to_player = (player.position - position).length()/48
+	if distance_to_player <= 9 and has_gun:
+		var direction = (player.position - position).normalized()
+		shoot_bullet(direction)
+		return
+
 
 
 func _on_timer_timeout() -> void:
-	print("Final boss performing some action")
-	#move()
-	var ran: int = randi_range(0, 3)
+	#print("Final boss performing some action")
+	var ran: int = randi_range(0, 1)
 	match ran:
 		0:
-			print("final boss moving!")
+			ready_to_shoot()
 			move()
 		1:
-			print("final boss shooting!")
-			shoot_bullet(last_direction)
-		3:
-			print("final boss awaiting")
-			pass
+			move()
+			move()
