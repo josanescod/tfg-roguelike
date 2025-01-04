@@ -30,8 +30,36 @@ var player_position: Vector2
 @export var max_coins_per_room: int
 @export var max_hearts_per_room: int
 
+var testResults = []
+
 func _ready():
+	#run_test_algo()
 	generate_map()
+
+
+func run_test_algo() -> void:
+	var max_R = 10
+	for r in range(1, max_R):
+		rooms_to_build = r
+		test_algorithm("random_walk", r)
+	for r in range(1, max_R):
+		rooms_to_build = r
+		test_algorithm("cellular", r)
+	for r in range(1, max_R):
+		rooms_to_build = r
+		test_algorithm("agent_based", r)
+
+func test_algorithm(algorithm:String, n_rooms:int) -> void:
+	rooms_to_build = n_rooms
+	Global.algorithm = algorithm
+	algorithm_manager.setup(ship_width, ship_heigth, rooms_to_build)
+	algorithm_manager.set_algorithm(Global.algorithm)  # "random_walk" o "agent_based" o "cellular"
+	var result = algorithm_manager.generate(Vector2(init_x, init_y))
+	ship_map = result.ship_map
+	initial_room_position = result.initial_room_position
+	algorithm_execution_time = result.execution_time
+	player_position = Vector2(init_x, init_y)
+	print_test_generation()
 
 func generate_map() -> void:
 	algorithm_manager.setup(ship_width, ship_heigth, rooms_to_build)
