@@ -24,21 +24,25 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 
 #### List of Original File Names Modified
 
-- coin.ogg -> retro_coin_02.ogg
-- death.ogg -> retro_die_03.ogg
-- hit.ogg -> retro_die_03.ogg
-- heart.ogg -> power_up_01.ogg
-- key.ogg -> power_up_04.ogg
-- laser_shot.ogg ->  synth_laser_08.ogg
-- next_room.ogg -> synth_misc_05.ogg
-- walk.ogg -> synth_misc_15.ogg
+| Original Name        |  Modified Name     |
+|----------------------|--------------------|
+| `retro_coin_02.ogg`  | `coin.ogg`         |
+| `retro_die_03.ogg`   | `death.ogg`        |
+| `retro_die_02.ogg`   | `hit.ogg`          |
+| `power_up_01.ogg`    | `heart.ogg`        |
+| `power_up_04.ogg`    | `key.ogg`          |
+| `synth_laser_08.ogg` | `laser_shot.ogg`   |
+| `synth_misc_05.ogg`  | `next_room.ogg`    |
+| `synth_misc_15.ogg`  | `walk.ogg`         |
 
 - Win Sound Effect by Listener (https://opengameart.org/content/win-sound-effect)
 - License: Creative Commons Zero, CC0
 
 #### List of Original File Names Modified
 
-- victory.ogg -> Win sound.wav
+| Original Name  |  Modified Name    |
+|----------------|-------------------|
+| `Win sound.wav`| `victory.ogg`     |
 
 ### Background Music
 
@@ -47,7 +51,9 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 
 #### List of Original File Names Modified
 
-- long_away_home.ogg -> Long Away Home.wav
+| Original Name        | Modified Name          |
+|----------------------|------------------------|
+| `Long Away Home.wav` | `long_away_home.ogg`   |
 
 ### Background Image
 
@@ -56,6 +62,15 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 
 #### List of Original File Names Modified
 
-- space-background.png -> space.png
-- pattern.png -> space.png
-- background-grey.png -> space.png
+| Original Name  |  Modified Name           |
+|----------------|--------------------------|
+| `space.png`    | `space-background.png`   |
+| `space.png`    | `pattern.png`            |
+| `space.png`    | `background-grey.png`    |
+
+
+## Additional Files
+
+A folder named `algorithms-analysis` is included containing the `test_results.csv` file, which holds data extracted using the `run_test_algo()` function from the `level_builder.gd` script. This file includes execution times from 40 iterations of the algorithms used in the game.
+
+A Python script is also provided. This script generates a visualization graph of the data.
