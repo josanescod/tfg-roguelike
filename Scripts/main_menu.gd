@@ -29,7 +29,7 @@ func _on_play_pressed() -> void:
 
 func _on_quit_pressed() -> void:
 	if OS.get_name() == "Web":
-		JavaScriptBridge.eval("window.location.href='https://github.com/josanescod/tfg-roguelike/index.html'")
+		JavaScriptBridge.eval("window.location.href='https://josanescod.github.io/tfg-roguelike/'")
 	else:
 		get_tree().quit()
 
