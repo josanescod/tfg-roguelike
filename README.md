@@ -71,6 +71,6 @@ This repository contains the code and documentation for the `tfg-roguelike` proj
 
 ## Additional Files
 
-A folder named `algorithms-analysis` is included containing the `test_results.csv` file, which holds data extracted using the `run_test_algo()` function from the `level_builder.gd` script. This file includes execution times from 40 iterations of the algorithms used in the game.
+A folder named `algorithms_analysis` is included containing the `test_results.csv` file, which holds data extracted using the `run_test_algo()` function from the `level_builder.gd` script. This file includes execution times from 40 iterations of the algorithms used in the game.
 
 A Python script is also provided. This script generates a visualization graph of the data.
