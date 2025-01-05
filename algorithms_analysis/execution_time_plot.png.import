@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8xevu63j5osd"
-path="res://.godot/imported/execution_time_plot.png-693a8087f479a741916de97bac0a6dfb.ctex"
+path="res://.godot/imported/execution_time_plot.png-61ce14346d2e1792e965959ea5edf0f5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://algorithms-analysis/execution_time_plot.png"
-dest_files=["res://.godot/imported/execution_time_plot.png-693a8087f479a741916de97bac0a6dfb.ctex"]
+source_file="res://algorithms_analysis/execution_time_plot.png"
+dest_files=["res://.godot/imported/execution_time_plot.png-61ce14346d2e1792e965959ea5edf0f5.ctex"]
 
 [params]
 

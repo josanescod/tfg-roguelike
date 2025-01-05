@@ -1,8 +1,8 @@
-# tfg-roguelike
+# Amnesiac Passenger
 
 ## Overview
 
-This repository contains the code and documentation for the `tfg-roguelike` project.
+This repository contains the code and documentation for the `amnesiac-passenger` project.
 
 
 ## Credits

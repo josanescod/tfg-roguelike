@@ -6,10 +6,10 @@ uid="uid://cdkct341tnlyd"
 
 [deps]
 
-files=["res://algorithms-analysis/test_results.Rooms.translation", "res://algorithms-analysis/test_results.Density.translation", "res://algorithms-analysis/test_results.Execution Time.translation"]
+files=["res://algorithms_analysis/test_results.Rooms.translation", "res://algorithms_analysis/test_results.Density.translation", "res://algorithms_analysis/test_results.Execution Time.translation"]
 
-source_file="res://algorithms-analysis/test_results.csv"
-dest_files=["res://algorithms-analysis/test_results.Rooms.translation", "res://algorithms-analysis/test_results.Density.translation", "res://algorithms-analysis/test_results.Execution Time.translation"]
+source_file="res://algorithms_analysis/test_results.csv"
+dest_files=["res://algorithms_analysis/test_results.Rooms.translation", "res://algorithms_analysis/test_results.Density.translation", "res://algorithms_analysis/test_results.Execution Time.translation"]
 
 [params]
 

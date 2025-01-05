@@ -10,7 +10,7 @@ This folder contains data and scripts for analyzing the performance of the game'
 4. In `run_test_algo()`, set `max_R` (max rooms) to a value between 1 and 41.
 5. Run the scene (press `F6`).
 6. On Linux, the `test_results.csv` will be saved to `~/.local/share/godot/app_userdata/tfg-rglike`.
-7. Copy the `test_results.csv` to the `algorithms-analysis` folder.
+7. Copy the `test_results.csv` to the `algorithms_analysis` folder.
 8. Set up the Python environment:
     ```bash
     python -m venv .env
