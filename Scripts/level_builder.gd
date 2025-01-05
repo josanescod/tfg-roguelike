@@ -33,21 +33,40 @@ var player_position: Vector2
 var testResults = []
 
 func _ready():
+	#create_csv_file()
 	#run_test_algo()
 	generate_map()
 
+func create_csv_file() -> void:
+	var file = FileAccess.open("user://test_results.csv", FileAccess.WRITE)
+	if file:
+		file.store_string("Algorithm,Rooms,Density,Execution Time\n")
+		file.close()
+		# Get and print the absolute path
+		var path = OS.get_user_data_dir()
+		var full_path = path.path_join("test_results.csv")
+		print("CSV file saved in path: ", full_path)
+	else:
+		print("Error: Could not create CSV file.")
+
+func save_results_to_csv(algorithm: String, n_rooms: int, density: float, execution_time: float) -> void:
+	var file = FileAccess.open("user://test_results.csv", FileAccess.READ_WRITE)
+	if file:
+		file.seek_end()  # Move to the end of the file
+		var line = "%s,%d,%.2f,%.2f\n" % [algorithm, n_rooms, density, execution_time]
+		file.store_string(line)
+		file.close()
+	else:
+		print("Error: Could not open file for writing.")
 
 func run_test_algo() -> void:
-	var max_R = 10
-	for r in range(1, max_R):
-		rooms_to_build = r
-		test_algorithm("random_walk", r)
-	for r in range(1, max_R):
-		rooms_to_build = r
-		test_algorithm("cellular", r)
-	for r in range(1, max_R):
-		rooms_to_build = r
-		test_algorithm("agent_based", r)
+	var max_R = 41
+	# Test each algorithm with different room counts
+	var algorithms = ["random_walk", "cellular", "agent_based"]
+	for algorithm in algorithms:
+		for r in range(1, max_R):
+			rooms_to_build = r
+			test_algorithm(algorithm, r)
 
 func test_algorithm(algorithm:String, n_rooms:int) -> void:
 	rooms_to_build = n_rooms
@@ -59,6 +78,8 @@ func test_algorithm(algorithm:String, n_rooms:int) -> void:
 	initial_room_position = result.initial_room_position
 	algorithm_execution_time = result.execution_time
 	player_position = Vector2(init_x, init_y)
+	var density = float(rooms_to_build) / float(ship_width * ship_heigth) * 100
+	save_results_to_csv(algorithm, n_rooms, density, algorithm_execution_time)
 	print_test_generation()
 
 func generate_map() -> void:
