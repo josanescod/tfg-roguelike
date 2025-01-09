@@ -2,8 +2,20 @@
 
 ## Overview
 
-This repository contains the code and documentation for the `amnesiac-passenger` project.
+Welcome to the `Amnesiac Passenger` repository. This project is a short video game roguelike demo developed to explore
+and analyze procedural generation algorithms. 
 
+In `Amnesiac Passenger`, you play as an astronaut with amnesia who has been abducted by strange aliens. Your mission is to explore the alien starship, uncover your memories, and find the exit to escape. The starship is procedurally generated, ensuring a unique and challenging experience every time you play.
+
+<br>
+
+<p align="center">
+<img src="./Assets/demo.gif" alt="alt text" width="30%" height="30%">
+</p>
+
+<p align="center">
+  <a href="https://josanescod.github.io/tfg-roguelike/">Go to Demo</a>
+</p>
 
 ## Credits
 
