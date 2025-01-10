@@ -1,17 +1,13 @@
 extends Node2D
 
-
-var inside_width : int = 9
-var inside_height : int = 9
-
 @onready var LevelBuilder : Node
 @onready var Pattern: TextureRect = $Pattern
-
 @export var enemy_item : PackedScene
 @export var coin_item : PackedScene
 @export var heart_item: PackedScene
 
-
+var inside_width : int = 9
+var inside_height : int = 9
 var used_position : Array
 
 func _ready():
@@ -21,7 +17,6 @@ func _ready():
 func _process(_delta: float) -> void:
 	handle_background_pause()
 
-
 func north():
 	$NorthDoor.visible = true
 	$NorthFloor.visible = true
@@ -29,6 +24,7 @@ func north():
 	$MetallicFloor.visible = true
 	$MetallicNorth.visible = true
 	$TextureNorth.visible = true
+
 func south():
 	$SouthDoor.visible = true
 	$SouthFloor.visible = true
@@ -36,6 +32,7 @@ func south():
 	$MetallicFloor.visible = true
 	$MetallicSouth.visible = true
 	$TextureSouth.visible = true
+
 func east():
 	$EastDoor.visible = true
 	$EastFloor.visible = true
@@ -43,6 +40,7 @@ func east():
 	$MetallicFloor.visible = true
 	$MetallicEast.visible = true
 	$TextureEast.visible = true
+
 func west():
 	$WestDoor.visible = true
 	$WestFloor.visible = true
@@ -50,6 +48,7 @@ func west():
 	$MetallicFloor.visible = true
 	$MetallicWest.visible = true
 	$TextureWest.visible = true
+
 func show_instructions_on_the_floor():
 	$InstructionsFloor.visible = true
 	$StarshipFloor.visible = true
@@ -67,7 +66,6 @@ func spawn_item(item_scene : PackedScene, min_ins : int = 0, max_ins : int = 0) 
 	var num : int = 1
 	if min_ins != 0 or max_ins != 0:
 		num = randi_range(min_ins, max_ins)
-
 	for i in range(num):
 		var item = item_scene.instantiate()
 		# position where items can be generated

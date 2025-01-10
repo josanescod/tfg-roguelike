@@ -24,7 +24,6 @@ func _on_body_entered(body):
 		Sfx.get_child(3).play()
 		get_tree().call_deferred("reload_current_scene")
 
-
 func load_winner_scene() -> void:
 	get_tree().change_scene_to_file("res://Scenes/winner_menu.tscn")
 

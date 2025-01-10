@@ -6,23 +6,17 @@ extends CharacterBody2D
 
 var health : int = 3
 var damage : int = 1
-
 var attack_chance : float = 0.5 #0.5
-
 var has_gun: bool = true
 var num_bullets: int = 3
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
-
 # to patrol corners
 var patrol_points: Array = []  # corners
 var current_patrol_index: int = 0
 
-
 func _ready() -> void:
 	update_health_label()
-
-
 
 func update_health_label() -> void:
 	match health:
@@ -56,11 +50,9 @@ func shoot_bullet(direction: Vector2) -> void:
 			print("final boss has no ammo, recharging ...")
 			num_bullets += 3
 
-
 func move() -> void:
 	var direction : Vector2 = Vector2.ZERO
 	var can_move : bool = false
-	
 	while(can_move == false):
 		direction = get_random_direction()
 		last_direction = direction
@@ -84,7 +76,6 @@ func get_random_direction() -> Vector2:
 			return Vector2.LEFT
 		3:
 			return Vector2.RIGHT
-	
 	return Vector2.ZERO
 
 func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
@@ -93,7 +84,6 @@ func take_damage(damage_taken : int, allow_counterattack: bool = true) -> void:
 	$AnimationPlayer.play("Hit")
 	$SFX.stream = load("res://Assets/Sounds/hit.ogg")
 	$SFX.play()
-
 	if health <= 0:
 		await $SFX.finished
 		player.boss_defeated = true
@@ -110,8 +100,6 @@ func ready_to_shoot() -> void:
 		var direction = (player.position - position).normalized()
 		shoot_bullet(direction)
 		return
-
-
 
 func _on_timer_timeout() -> void:
 	#print("Final boss performing some action")

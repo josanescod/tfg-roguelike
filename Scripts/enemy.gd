@@ -5,7 +5,6 @@ extends CharacterBody2D
 
 var health : int = 3
 var damage : int = 1
-
 var attack_chance : float = 0.5
 
 # drop gun
@@ -24,21 +23,17 @@ func update_health_label() -> void:
 		1:
 			$LabelHealth.text = "1"
 
-
 func move() -> void:
 	if randf() < 0.5:
 		return
 	var direction : Vector2 = Vector2.ZERO
 	var can_move : bool = false
-	
 	while(can_move == false):
 		direction = get_random_direction()
-		
 		var space_rid = get_world_2d().space # raycasting documentation -> https://docs.godotengine.org/en/stable/tutorials/physics/ray-casting.html
 		var space_state = PhysicsServer2D.space_get_direct_state(space_rid)
 		var ray_query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(48, 48) * direction)
 		var intersection_result = space_state.intersect_ray(ray_query)
-		
 		if not intersection_result and position + 48 * direction != player.position:
 			can_move = true
 	position += 48 * direction

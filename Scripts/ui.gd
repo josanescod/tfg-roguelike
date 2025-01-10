@@ -2,7 +2,6 @@ extends CanvasLayer
 
 
 @onready var player : CharacterBody2D = get_tree().get_first_node_in_group("Player")
-
 @onready var LevelBuilder : Node = $"../LevelBuilder"
 @onready var grid : PackedScene = load("res://Nodes/mini_map_grid.tscn")
 
@@ -15,11 +14,9 @@ func _ready() -> void:
 	generate_mini_map()
 	$PauseMenu/VBoxContainer/Continue.text = tr("BTN_CONTINUE")
 	$PauseMenu/VBoxContainer/EndGame.text = tr("BTN_ENDGAME")
-	
 
 func _process(_delta):
 	$StatBar/Coins.text = str(Global.coins)	
-	
 	
 	# handle key
 	if player.has_key:
@@ -93,20 +90,18 @@ func _on_timer_timeout() -> void:
 	#var milliseconds = int((elapsed_time - int(elapsed_time)) * 100)
 	#$"TimeBar/Time".text = '%02d:%02d:%02d' % [minutes, seconds, milliseconds]
 	$"TimeBar/Time".text = '%02d:%02d' % [minutes, seconds]
-	
+
 func on_timer_stoped() -> void:
 	$"TimeBar/Timer".stop()
 	#print("Total time: ", $"TimeBar/Time".text)
 
-
-
 # handle MiniMap
 func generate_mini_map() -> void:
-	$MiniMap/GridContainer.columns = LevelBuilder.ship_width
-	for i in range(LevelBuilder.ship_heigth):
-		for j in range(LevelBuilder.ship_width):
+	$MiniMap/GridContainer.columns = LevelBuilder.starship_width
+	for i in range(LevelBuilder.starship_heigth):
+		for j in range(LevelBuilder.starship_width):
 			var panel = grid.instantiate()
-			if LevelBuilder.ship_map[j][i] == false:
+			if LevelBuilder.starship_map[j][i] == false:
 				panel.modulate = "ffffff00" # room doesn't exist
 			else:
 				panel.is_room = true
@@ -121,7 +116,6 @@ func update_minimap() -> void:
 			panel.modulate = "ffffff"
 		if panel.pos == pos:
 			panel.modulate = "fdd5cf"
-
 
 func _on_continue_pressed() -> void:
 	$PauseMenu.visible = false

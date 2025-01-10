@@ -6,23 +6,19 @@ extends CharacterBody2D
 # signal to emit
 signal player_moved
 var exit_door_room_position: Vector2
-
 # initial condition Player has not the key
 var has_key: bool = false
 var has_gun: bool = false
 var boss_spawned: bool = false
 var boss_defeated: bool = false
 var num_bullets: int = 0
-
 # to save last movement up by default
 var last_direction : Vector2 = Vector2.UP
-
 var enemies = []
 
 func _ready() -> void:
 	# background music
 	Sfx.get_child(1).play()
-
 
 # Main function to be executed in each physics frame
 func _physics_process(_delta):
@@ -94,7 +90,6 @@ func move(direction : Vector2) -> void:
 	var space_state = PhysicsServer2D.space_get_direct_state(space_rid)
 	var ray_query = PhysicsRayQueryParameters2D.create(global_position, global_position + Vector2(48, 48) * direction)
 	var intersection_result = space_state.intersect_ray(ray_query)
-	
 	if intersection_result and intersection_result.collider.is_in_group("Wall"):
 		return
 	else:

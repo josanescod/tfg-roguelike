@@ -4,8 +4,8 @@ var damage: int = 1
 var is_player_bullet: bool = true
 
 func _process(_delta: float) -> void:
-	move_and_slide()
-
+	if visible:
+		move_and_slide()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if not self.visible:
@@ -20,7 +20,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		if body.has_method("take_damage"):
 			body.take_damage(damage)
 			get_parent().reset_bullet(self)
-	
+
 	elif body.is_in_group("Wall"):
 		get_parent().reset_bullet(self)
-		
+		return

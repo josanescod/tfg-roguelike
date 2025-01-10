@@ -1,7 +1,7 @@
 extends Node
 
 class MapData:
-	var ship_map: Array
+	var starship_map: Array
 	var initial_room_position: Vector2
 	var width: int
 	var height: int
@@ -14,11 +14,11 @@ class MapData:
 		initialize_map()
 		
 	func initialize_map() -> void:
-		ship_map = []
+		starship_map = []
 		for i in range(width):
-			ship_map.append([])
+			starship_map.append([])
 			for j in range (height):
-				ship_map[i].append(false)
+				starship_map[i].append(false)
 		
 class RandomWalkGenerator:
 	static func generate(map_data: MapData, start_pos: Vector2) -> void:
@@ -29,8 +29,8 @@ class RandomWalkGenerator:
 		var first_room_created = false
 		
 		while rooms_created < map_data.rooms_count:
-			if not map_data.ship_map[current_x][current_y]:
-				map_data.ship_map[current_x][current_y] = true
+			if not map_data.starship_map[current_x][current_y]:
+				map_data.starship_map[current_x][current_y] = true
 				rooms_created += 1
 				if not first_room_created:
 					map_data.initial_room_position = Vector2(current_x, current_y)
@@ -51,7 +51,7 @@ class AgentBasedGenerator:
 		var rooms_created = 0
 		var current_pos = Vector2(start_pos)
 		# Place initial room
-		map_data.ship_map[int(current_pos.x)][int(current_pos.y)] = true
+		map_data.starship_map[int(current_pos.x)][int(current_pos.y)] = true
 		map_data.initial_room_position = current_pos
 		rooms_created += 1
 		while rooms_created < map_data.rooms_count:
@@ -75,7 +75,7 @@ class AgentBasedGenerator:
 			)
 
 			if is_valid_room_position(map_data, new_pos):
-				map_data.ship_map[new_pos.x][new_pos.y] = true
+				map_data.starship_map[new_pos.x][new_pos.y] = true
 				return true
 
 		return false
@@ -84,7 +84,7 @@ class AgentBasedGenerator:
 		if not (pos.x >= 0 and pos.x < map_data.width and pos.y >= 0 and pos.y < map_data.height):
 			return false
 
-		if map_data.ship_map[pos.x][pos.y]:
+		if map_data.starship_map[pos.x][pos.y]:
 			return false
 
 		var adjacent_rooms = 0
@@ -96,7 +96,7 @@ class AgentBasedGenerator:
 					continue
 
 				var check_pos = Vector2(pos.x + x, pos.y + y)
-				if is_valid_position(map_data, check_pos) and map_data.ship_map[check_pos.x][check_pos.y]:
+				if is_valid_position(map_data, check_pos) and map_data.starship_map[check_pos.x][check_pos.y]:
 					if abs(x) == 1 and abs(y) == 1:
 						diagonal_rooms += 1
 					else:
@@ -112,7 +112,7 @@ class AgentBasedGenerator:
 		var room_positions = []
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				if map_data.ship_map[x][y]:
+				if map_data.starship_map[x][y]:
 					room_positions.append(Vector2(x, y))
 		room_positions.shuffle()
 		for pos in room_positions:
@@ -125,7 +125,7 @@ class AgentBasedGenerator:
 	static func find_last_placed_room(map_data: MapData) -> Vector2:
 		for x in range(map_data.width - 1, -1, -1):
 			for y in range(map_data.height - 1, -1, -1):
-				if map_data.ship_map[x][y]:
+				if map_data.starship_map[x][y]:
 					return Vector2(x, y)
 		return Vector2(0, 0)
 
@@ -146,7 +146,7 @@ class AgentBasedGenerator:
 				visited[x].append(false)
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				if map_data.ship_map[x][y] and not visited[x][y]:
+				if map_data.starship_map[x][y] and not visited[x][y]:
 					var new_region = flood_fill(map_data, visited, x, y)
 					regions.append(new_region)
 		return regions
@@ -169,7 +169,7 @@ class AgentBasedGenerator:
 				var nx = x + int(dir.x)
 				var ny = y + int(dir.y)
 				if is_valid_position(map_data, Vector2(nx, ny)):
-					if map_data.ship_map[nx][ny] and not visited[nx][ny]:
+					if map_data.starship_map[nx][ny] and not visited[nx][ny]:
 						stack.append([nx, ny])
 		return region
 
@@ -191,7 +191,7 @@ class AgentBasedGenerator:
 		var current_y = start[1]
 
 		while current_x != end[0] or current_y != end[1]:
-			map_data.ship_map[current_x][current_y] = true
+			map_data.starship_map[current_x][current_y] = true
 
 			if current_x < end[0]:
 				current_x += 1
@@ -216,7 +216,7 @@ class CellularAutomataGenerator:
 		while attempts < max_attempts:
 			for x in range(map_data.width):
 				for y in range(map_data.height):
-					map_data.ship_map[x][y] = false
+					map_data.starship_map[x][y] = false
 
 			randomize_initial_state(map_data, density)
 			for i in range(ITERATIONS):
@@ -239,13 +239,13 @@ class CellularAutomataGenerator:
 		for x in range(map_data.width):
 			for y in range(map_data.height):
 				var neighbors = count_neighbors(map_data, x, y)
-				if map_data.ship_map[x][y]:
+				if map_data.starship_map[x][y]:
 					new_map[x][y] = neighbors >= DEATH_LIMIT
 				else:
 					new_map[x][y] = neighbors > BIRTH_LIMIT
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				map_data.ship_map[x][y] = new_map[x][y]
+				map_data.starship_map[x][y] = new_map[x][y]
 	static func count_neighbors(map_data: MapData, x: int, y: int) -> int:
 		var count = 0
 		for i in range(-1, 2):
@@ -255,7 +255,7 @@ class CellularAutomataGenerator:
 				var nx = x + i
 				var ny = y + j
 				if nx >= 0 and nx < map_data.width and ny >= 0 and ny < map_data.height:
-					if map_data.ship_map[nx][ny]:
+					if map_data.starship_map[nx][ny]:
 						count += 1
 		return count
 	static func ensure_connectivity(map_data: MapData) -> void:
@@ -274,7 +274,7 @@ class CellularAutomataGenerator:
 				visited[x].append(false)
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				if map_data.ship_map[x][y] and not visited[x][y]:
+				if map_data.starship_map[x][y] and not visited[x][y]:
 					var new_region = flood_fill(map_data, visited, x, y)
 					regions.append(new_region)
 		return regions
@@ -294,7 +294,7 @@ class CellularAutomataGenerator:
 				var nx = x + dir[0]
 				var ny = y + dir[1]
 				if nx >= 0 and nx < map_data.width and ny >= 0 and ny < map_data.height:
-					if map_data.ship_map[nx][ny] and not visited[nx][ny]:
+					if map_data.starship_map[nx][ny] and not visited[nx][ny]:
 						stack.append([nx, ny])
 		return region
 
@@ -302,7 +302,7 @@ class CellularAutomataGenerator:
 		var count = 0
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				if map_data.ship_map[x][y]:
+				if map_data.starship_map[x][y]:
 					count += 1
 		return count
 
@@ -312,15 +312,15 @@ class CellularAutomataGenerator:
 			var x = randi() % map_data.width
 			var y = randi() % map_data.height
 
-			if map_data.ship_map[x][y]:
+			if map_data.starship_map[x][y]:
 				if not would_disconnect(map_data, x, y):
-					map_data.ship_map[x][y] = false
+					map_data.starship_map[x][y] = false
 					current_rooms -= 1
 
 	static func would_disconnect(map_data: MapData, x: int, y: int) -> bool:
-		map_data.ship_map[x][y] = false
+		map_data.starship_map[x][y] = false
 		var regions = find_regions(map_data)
-		map_data.ship_map[x][y] = true
+		map_data.starship_map[x][y] = true
 		return regions.size() > 1
 
 	static func connect_regions(map_data: MapData, region1: Array, region2: Array) -> void:
@@ -343,7 +343,7 @@ class CellularAutomataGenerator:
 		var current_y = start[1]
 
 		while current_x != end[0] or current_y != end[1]:
-			map_data.ship_map[current_x][current_y] = true
+			map_data.starship_map[current_x][current_y] = true
 
 			if current_x < end[0]:
 				current_x += 1
@@ -357,18 +357,14 @@ class CellularAutomataGenerator:
 	static func set_initial_room(map_data: MapData, _start_pos: Vector2) -> void:
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				if map_data.ship_map[x][y]:
+				if map_data.starship_map[x][y]:
 					map_data.initial_room_position = Vector2(x,y)
 					return
-		#var start_x = int(start_pos.x)
-		#var start_y = int(start_pos.y)
-		#map_data.ship_map[start_x][start_y] = true
-		#map_data.initial_room_position = start_pos
 
 	static func randomize_initial_state(map_data: MapData, density: float = 0.45) -> void:
 		for x in range(map_data.width):
 			for y in range(map_data.height):
-				map_data.ship_map[x][y] = randf() < density
+				map_data.starship_map[x][y] = randf() < density
 
 	static func fallback_generation(map_data: MapData, start_pos: Vector2) -> void:
 		var current_x = int(start_pos.x)
@@ -376,8 +372,8 @@ class CellularAutomataGenerator:
 		var rooms_created = 0
 
 		while rooms_created < map_data.rooms_count:
-			if not map_data.ship_map[current_x][current_y]:
-				map_data.ship_map[current_x][current_y] = true
+			if not map_data.starship_map[current_x][current_y]:
+				map_data.starship_map[current_x][current_y] = true
 				rooms_created += 1
 
 			var direction = randi() % 4
@@ -415,7 +411,7 @@ func generate(start_position: Vector2) -> Dictionary:
 		execute_generation(start_position)
 	)
 	var result = {
-		"ship_map": map_data.ship_map,
+		"starship_map": map_data.starship_map,
 		"initial_room_position": map_data.initial_room_position,
 		"execution_time": execution_time
 	}

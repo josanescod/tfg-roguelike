@@ -2,6 +2,9 @@ extends Control
 
 
 func _ready() -> void:
+	update_ui_text()
+
+func update_ui_text():
 	$Start/MsgWon.text = tr("MSG_WON")
 	$Start/Stats/Stats1.text = tr("STAT_LEVEL") + ": " + str(Global.level) 
 	$Start/Stats/Stats2.text = tr("STAT_ENEMIES") + ": " + str(Global.enemies_defeated)
