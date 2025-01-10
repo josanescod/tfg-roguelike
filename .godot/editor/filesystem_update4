@@ -1,0 +1,6 @@
+res://Scenes/world.tscn
+res://Nodes/room.tscn
+res://Nodes/coin.tscn
+res://Nodes/enemy.tscn
+res://Nodes/final_boss.tscn
+res://Nodes/bullet.tscn
